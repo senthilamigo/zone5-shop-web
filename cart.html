@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zone5 Shop - Shopping Cart</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-top">
+            <div class="header-links">
+                <a href="#">Track Orders</a>
+                <a href="#">Sign In</a>
+                <a href="#">Sign Up</a>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <a href="index.html" class="logo">Zone5 Shop</a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="display.html">Shop</a>
+                    <a href="admin.html">Admin</a>
+                </div>
+                <a href="cart.html" class="cart-icon">
+                    <span class="cart-count">0</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4m7 14V9a2 2 0 0 0-2-2h-5m0 0V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M7 3v4m0 0v10m0-10h10m-10 0H5m12 0v10m0-10h2"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="cart-main">
+        <div class="container">
+            <h1 class="cart-title">Shopping Cart</h1>
+            
+            <div id="cartContent" class="cart-content">
+                <div class="cart-items" id="cartItems">
+                    <!-- Cart items will be dynamically loaded here -->
+                </div>
+                
+                <div class="cart-summary" id="cartSummary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">₹0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Total:</span>
+                        <span id="total" class="total-price">₹0.00</span>
+                    </div>
+                    <button class="btn btn-primary btn-checkout">Proceed to Checkout</button>
+                </div>
+            </div>
+
+            <div id="emptyCart" class="empty-cart" style="display: none;">
+                <p>Your cart is empty</p>
+                <a href="display.html" class="btn btn-primary">Continue Shopping</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Trust Indicators</h3>
+                <ul>
+                    <li>✓ Authentic Products</li>
+                    <li>✓ Easy Returns</li>
+                    <li>✓ Secure Payments</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Zone5 Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>
+

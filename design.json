@@ -1,0 +1,388 @@
+{
+  "designSystem": {
+    "metadata": {
+      "projectName": "Tata CLiQ Fashion E-commerce",
+      "designType": "E-commerce Platform",
+      "platform": "Web",
+      "industry": "Fashion & Retail"
+    },
+    "colorPalette": {
+      "primary": {
+        "brand": "#E91E63",
+        "brandName": "CLiQ Fashion Pink",
+        "usage": "Logo, CTAs, accent elements"
+      },
+      "secondary": {
+        "dark": "#1A1A1A",
+        "darkGray": "#2D2D2D",
+        "usage": "Header, navigation, footer backgrounds"
+      },
+      "neutral": {
+        "lightGray": "#F5F5F5",
+        "mediumGray": "#E0E0E0",
+        "white": "#FFFFFF",
+        "usage": "Backgrounds, cards, dividers"
+      },
+      "text": {
+        "primary": "#000000",
+        "secondary": "#666666",
+        "inverse": "#FFFFFF"
+      },
+      "accent": {
+        "red": "#D32F2F",
+        "sale": "#FF0000",
+        "discount": "#4CAF50"
+      }
+    },
+    "typography": {
+      "fontFamilies": {
+        "primary": "Sans-serif, likely Inter or similar modern geometric sans",
+        "fallback": "system-ui, -apple-system, sans-serif"
+      },
+      "hierarchy": {
+        "h1": {
+          "size": "48-72px",
+          "weight": "700-900",
+          "usage": "Hero headlines, promotional text"
+        },
+        "h2": {
+          "size": "24-32px",
+          "weight": "600-700",
+          "usage": "Section titles, category headers"
+        },
+        "h3": {
+          "size": "18-20px",
+          "weight": "600",
+          "usage": "Product names, subsection titles"
+        },
+        "body": {
+          "size": "14-16px",
+          "weight": "400",
+          "usage": "Descriptions, content text"
+        },
+        "caption": {
+          "size": "12-13px",
+          "weight": "400-500",
+          "usage": "Labels, metadata, prices"
+        },
+        "cta": {
+          "size": "14-16px",
+          "weight": "600-700",
+          "usage": "Button text, links"
+        }
+      },
+      "textTransform": {
+        "uppercase": "Navigation items, CTAs, category labels",
+        "capitalize": "Product names, brand names",
+        "none": "Body text, descriptions"
+      }
+    },
+    "layout": {
+      "grid": {
+        "columns": 12,
+        "maxWidth": "1440px",
+        "gutters": "16-24px",
+        "responsive": true
+      },
+      "spacing": {
+        "xs": "4px",
+        "sm": "8px",
+        "md": "16px",
+        "lg": "24px",
+        "xl": "32px",
+        "xxl": "48px",
+        "xxxl": "64px"
+      },
+      "containerTypes": {
+        "fullWidth": "100% viewport width",
+        "contained": "Max 1440px centered",
+        "sectionPadding": "40-80px vertical"
+      }
+    },
+    "components": {
+      "header": {
+        "structure": "Fixed top navigation",
+        "height": "60-80px",
+        "background": "Dark (#1A1A1A)",
+        "layers": [
+          {
+            "name": "Top bar",
+            "content": "Brand links (Luxury, Cash, Gift Card, Care), Track Orders, Sign In/Up",
+            "alignment": "Space between",
+            "textColor": "White"
+          },
+          {
+            "name": "Main navigation",
+            "content": "Logo, Categories dropdown, Brands dropdown, Search bar, Icons (voice, wishlist, cart)",
+            "alignment": "Horizontal distribution"
+          }
+        ]
+      },
+      "hero": {
+        "structure": "Full-width carousel",
+        "height": "400-600px",
+        "background": "Gradient or solid color",
+        "content": {
+          "layout": "Split (60% visual, 40% text) or centered",
+          "elements": [
+            "Large headline with promotional text",
+            "Product image or lifestyle imagery",
+            "CTA button",
+            "Promotional badge/tag"
+          ]
+        },
+        "navigation": "Arrow controls on sides",
+        "brandStrip": "Logo carousel at bottom of hero"
+      },
+      "categoryGrid": {
+        "structure": "Horizontal scrollable or grid",
+        "itemLayout": {
+          "image": "Square or portrait aspect ratio",
+          "overlay": "Gradient overlay with text",
+          "text": "Category name and discount percentage",
+          "textPosition": "Bottom or center"
+        },
+        "columns": "6-12 items per row",
+        "gap": "16-24px"
+      },
+      "productCard": {
+        "structure": "Vertical card",
+        "aspectRatio": "3:4 for product image",
+        "elements": [
+          {
+            "name": "Image container",
+            "features": "Hover effects, badges (New Arrivals, Westside, Online Only)",
+            "badgePosition": "Top left"
+          },
+          {
+            "name": "Wishlist icon",
+            "position": "Top right",
+            "style": "Heart outline, toggleable"
+          },
+          {
+            "name": "Brand name",
+            "weight": "600",
+            "color": "Primary text"
+          },
+          {
+            "name": "Product title",
+            "weight": "400",
+            "color": "Secondary text",
+            "maxLines": 2
+          },
+          {
+            "name": "Price",
+            "display": "Strikethrough original, bold sale price",
+            "color": "Primary text"
+          },
+          {
+            "name": "Rating",
+            "display": "Stars + count",
+            "size": "Small"
+          },
+          {
+            "name": "Stock status",
+            "display": "Limited stock tag",
+            "color": "Red or orange"
+          }
+        ],
+        "spacing": "12-16px internal padding",
+        "background": "White",
+        "border": "None or subtle 1px"
+      },
+      "buttons": {
+        "primary": {
+          "background": "Black",
+          "color": "White",
+          "padding": "12px 32px",
+          "borderRadius": "4px",
+          "fontWeight": "600",
+          "textTransform": "uppercase",
+          "hoverState": "Slight scale or opacity change"
+        },
+        "secondary": {
+          "background": "Transparent",
+          "border": "2px solid black",
+          "color": "Black",
+          "padding": "12px 32px",
+          "borderRadius": "4px"
+        }
+      },
+      "filters": {
+        "structure": "Left sidebar",
+        "width": "200-250px",
+        "background": "White or light gray",
+        "sections": [
+          {
+            "type": "Category list",
+            "display": "Radio buttons or checkboxes",
+            "showCount": true
+          },
+          {
+            "type": "Expandable accordion",
+            "sections": "Brand, Color, Size, Price, Type, etc.",
+            "icon": "Plus/minus for expand/collapse"
+          }
+        ],
+        "actions": {
+          "clearAll": "Link at top",
+          "apply": "Auto-apply on selection"
+        }
+      },
+      "badges": {
+        "types": [
+          {
+            "name": "New Arrivals",
+            "background": "#E8D5FF or similar pastel",
+            "color": "Purple",
+            "fontSize": "10-11px"
+          },
+          {
+            "name": "Westside",
+            "background": "#D5E8FF or similar pastel",
+            "color": "Blue"
+          },
+          {
+            "name": "Online Only",
+            "background": "#FFD5E8 or similar pastel",
+            "color": "Pink"
+          },
+          {
+            "name": "Sale/Discount",
+            "background": "Red or bright accent",
+            "color": "White",
+            "position": "Prominent, top right or center"
+          }
+        ],
+        "borderRadius": "4px",
+        "padding": "4px 8px",
+        "fontWeight": "600"
+      },
+      "sectionHeaders": {
+        "structure": "Centered or left-aligned",
+        "fontSize": "24-32px",
+        "fontWeight": "600-700",
+        "marginBottom": "32-48px",
+        "underline": "Optional subtle line",
+        "navigation": "Arrow controls if carousel section"
+      },
+      "footer": {
+        "structure": "Multi-column layout",
+        "background": "White or light gray",
+        "sections": [
+          {
+            "name": "Company info",
+            "columns": "Tata MarketPlace, Customer Service, My Tata CLiQ, Tata CLiQ Offerings"
+          },
+          {
+            "name": "Trust indicators",
+            "display": "Icons with text (Authentic Brands, Easy Returns, Easy Payments)"
+          },
+          {
+            "name": "App download",
+            "display": "App store badges"
+          },
+          {
+            "name": "Social media",
+            "display": "Icon links"
+          },
+          {
+            "name": "Legal",
+            "display": "Copyright, links"
+          }
+        ],
+        "linkStyle": "Simple text links, gray color",
+        "dividers": "Subtle horizontal lines between sections"
+      },
+      "promotionalBanners": {
+        "structure": "Horizontal full-width or contained",
+        "background": "Gradient or solid brand colors",
+        "content": {
+          "text": "Large bold headlines",
+          "discount": "Prominently displayed percentage",
+          "cta": "Contrasting button"
+        },
+        "style": "Modern, vibrant, attention-grabbing"
+      },
+      "discountCards": {
+        "structure": "Horizontal scrollable row",
+        "cardStyle": {
+          "background": "White",
+          "border": "1px solid light gray",
+          "borderRadius": "8px",
+          "padding": "16px",
+          "shadow": "Subtle"
+        },
+        "content": {
+          "logo": "Bank/payment partner logo",
+          "text": "Discount percentage + conditions",
+          "fontSize": "14px"
+        }
+      }
+    },
+    "designPatterns": {
+      "navigation": {
+        "primary": "Dropdown mega menu with categories and subcategories",
+        "breadcrumbs": "Small text with arrows/chevrons",
+        "filters": "Pill-style tags with X to remove"
+      },
+      "imagery": {
+        "productPhotos": {
+          "background": "Clean white or subtle gradient",
+          "style": "Professional studio shots or lifestyle",
+          "overlay": "Subtle gradient on cards for text readability"
+        },
+        "brandLogos": "Black and white or minimal color",
+        "aspectRatios": {
+          "hero": "16:9 or wider",
+          "categoryCards": "1:1 or 4:5",
+          "productCards": "3:4",
+          "banners": "Variable, often wide"
+        }
+      },
+      "interactions": {
+        "hover": "Subtle scale (1.02-1.05), opacity changes, or underlines",
+        "click": "Ripple effects or color changes",
+        "carousel": "Auto-play optional, manual arrow controls, dot indicators",
+        "wishlist": "Toggle with animation (heart fill)",
+        "filterApply": "Instant results update"
+      },
+      "responsiveness": {
+        "mobile": "Stack vertically, hamburger menu, full-width cards",
+        "tablet": "2-3 columns for products, simplified navigation",
+        "desktop": "4-6 columns for products, full navigation visible"
+      },
+      "accessibility": {
+        "contrast": "WCAG AA compliant minimum",
+        "focusStates": "Visible outlines on interactive elements",
+        "altText": "Required for all images",
+        "keyboardNav": "Full keyboard accessibility"
+      }
+    },
+    "visualStyle": {
+      "overall": "Clean, modern, minimalist e-commerce",
+      "cardShadows": "Subtle (0 2px 8px rgba(0,0,0,0.1)) or none",
+      "borderRadius": "4-8px for cards and buttons",
+      "whitespace": "Generous, breathing room between elements",
+      "imageStyle": "High-quality, consistent lighting, clean backgrounds",
+      "iconStyle": "Line icons, simple, consistent stroke width",
+      "emphasis": "Bold typography, color contrast, scale variation"
+    },
+    "contentStrategy": {
+      "productDescriptions": "Concise, 2-line maximum on cards",
+      "discounts": "Prominently displayed with 'UP TO X% OFF' pattern",
+      "urgency": "Limited stock indicators, sale countdowns",
+      "trustSignals": "Authentic brands, easy returns, payment options",
+      "categoryLabeling": "Clear, simple category names in uppercase",
+      "pricing": "Original price strikethrough, sale price bold"
+    },
+    "implementationNotes": {
+      "framework": "Likely React or similar component-based framework",
+      "stateManagement": "Required for cart, wishlist, filters",
+      "imageOptimization": "Lazy loading, responsive images",
+      "performance": "Fast load times critical for e-commerce",
+      "seo": "Structured data for products, proper meta tags",
+      "analytics": "Track clicks, conversions, user flow"
+    }
+  }
+}
