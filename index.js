@@ -1,8 +1,8 @@
 // Index Page JavaScript
 
 // Load and display sections grouped by category+tag combinations
-function loadSections() {
-    const dresses = getDresses();
+async function loadSections() {
+    const dresses = await getDresses();
     const sectionsContainer = document.getElementById('sections-container');
     
     if (!sectionsContainer) return;
@@ -74,10 +74,15 @@ function createProductCard(dress) {
     card.className = 'product-card';
     
     const imageUrl = dress.image || 'https://via.placeholder.com/300x300?text=Dress';
+    const status = dress.status || 'Available';
+    const isSoldOut = status === 'SoldOut';
+    const statusBadge = isSoldOut ? '<div class="product-card-badge" style="background-color: #cc0000; top: 10px; right: 10px;">Sold Out</div>' : '';
+    
     card.innerHTML = `
         <div class="product-card-image">
             <img src="${imageUrl}" alt="${dress.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=Dress';">
             ${dress.tags && dress.tags.length > 0 ? `<div class="product-card-badge">${dress.tags[0]}</div>` : ''}
+            ${statusBadge}
         </div>
     `;
     
@@ -90,23 +95,16 @@ function createProductCard(dress) {
 }
 
 // Initialize page
-document.addEventListener('DOMContentLoaded', function() {
-    // Ensure sample data is initialized first, then load sections
-    // Check if data exists, if not wait for initialization
-    function tryLoadSections() {
-        const dresses = getDresses();
-        if (dresses.length > 0) {
-            loadSections();
-        } else {
-            // If no data yet, wait a bit more and try again
-            setTimeout(tryLoadSections, 200);
-        }
-    }
-    
-    // Start trying to load sections
-    tryLoadSections();
+document.addEventListener('DOMContentLoaded', async function() {
+    // Wait for dresses to be loaded from JSON
+    await loadSections();
     
     // Also reload sections when data might have changed
+    window.addEventListener('dressesLoaded', function() {
+        loadSections();
+    });
+    
+    // Reload on storage changes (for admin edits)
     window.addEventListener('storage', function() {
         loadSections();
     });

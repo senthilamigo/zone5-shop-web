@@ -3,8 +3,8 @@
 let editingDressId = null;
 
 // Load inventory and display all dresses
-function loadInventory() {
-    const dresses = getDresses();
+async function loadInventory() {
+    const dresses = await getDresses();
     const inventoryGrid = document.getElementById('inventoryGrid');
     
     if (!inventoryGrid) return;
@@ -27,6 +27,9 @@ function createInventoryItem(dress) {
     const item = document.createElement('div');
     item.className = 'inventory-item';
     
+    const status = dress.status || 'Available';
+    const statusClass = status === 'SoldOut' ? 'status-soldout' : 'status-available';
+    
     item.innerHTML = `
         <img src="${dress.image}" alt="${dress.name}" class="inventory-item-image" onerror="this.src='https://via.placeholder.com/100x133?text=Dress'">
         <div class="inventory-item-content">
@@ -34,6 +37,12 @@ function createInventoryItem(dress) {
             <p class="inventory-item-category">Category: ${dress.category}</p>
             <p class="inventory-item-tags">Tags: ${dress.tags ? dress.tags.join(', ') : 'None'}</p>
             <p class="inventory-item-price">₹${dress.price.toFixed(2)}</p>
+            <p class="inventory-item-status" style="margin: 8px 0;">
+                <span style="font-weight: bold;">Status: </span>
+                <span class="${statusClass}" style="padding: 2px 8px; border-radius: 4px; background-color: ${status === 'SoldOut' ? '#ffcccc' : '#ccffcc'}; color: ${status === 'SoldOut' ? '#cc0000' : '#006600'};">
+                    ${status}
+                </span>
+            </p>
             <div class="inventory-item-actions">
                 <button class="btn btn-edit" onclick="editDress('${dress.id}')">Edit</button>
                 <button class="btn btn-delete" onclick="deleteDressItem('${dress.id}')">Delete</button>
@@ -70,8 +79,9 @@ function handleFormSubmit() {
     const category = document.getElementById('dressCategory').value;
     const tagsInput = document.getElementById('dressTags').value.trim();
     const price = parseFloat(document.getElementById('dressPrice').value);
+    const status = document.getElementById('dressStatus').value;
     
-    if (!name || !image || !description || !category || !tagsInput || !price || isNaN(price)) {
+    if (!name || !image || !description || !category || !tagsInput || !price || isNaN(price) || !status) {
         alert('Please fill in all fields correctly.');
         return;
     }
@@ -91,7 +101,8 @@ function handleFormSubmit() {
         description: description,
         category: category,
         tags: tags,
-        price: price
+        price: price,
+        status: status
     };
     
     saveDress(dress);
@@ -124,6 +135,7 @@ function editDress(id) {
     document.getElementById('dressCategory').value = dress.category;
     document.getElementById('dressTags').value = dress.tags ? dress.tags.join(', ') : '';
     document.getElementById('dressPrice').value = dress.price;
+    document.getElementById('dressStatus').value = dress.status || 'Available';
     
     // Update form title and button
     const formTitle = document.getElementById('formTitle');
@@ -200,9 +212,14 @@ function resetForm() {
 }
 
 // Initialize page
-document.addEventListener('DOMContentLoaded', function() {
-    loadInventory();
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadInventory();
     setupForm();
+    
+    // Reload inventory when dresses are updated
+    window.addEventListener('dressesLoaded', function() {
+        loadInventory();
+    });
 });
 
 // Make functions available globally
