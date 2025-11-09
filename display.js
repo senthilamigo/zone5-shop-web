@@ -6,8 +6,8 @@ let selectedCategories = [];
 let selectedTags = [];
 
 // Load all dresses and display them
-function loadAllDresses() {
-    allDresses = getDresses();
+async function loadAllDresses() {
+    allDresses = await getDresses();
     filteredDresses = [...allDresses];
     renderProductGrid(filteredDresses);
     setupFilters();
@@ -157,10 +157,15 @@ function createProductCard(dress) {
     const card = document.createElement('div');
     card.className = 'product-card';
     
+    const status = dress.status || 'Available';
+    const isSoldOut = status === 'SoldOut';
+    const statusBadge = isSoldOut ? '<div class="product-card-badge" style="background-color: #cc0000;">Sold Out</div>' : '';
+    
     card.innerHTML = `
         <div class="product-card-image">
             <img src="${dress.image}" alt="${dress.name}" onerror="this.src='https://via.placeholder.com/300x400?text=Dress'">
             ${dress.tags && dress.tags.length > 0 ? `<div class="product-card-badge">${dress.tags[0]}</div>` : ''}
+            ${statusBadge}
         </div>
         <div class="product-card-content">
             <h3 class="product-card-name">${dress.name}</h3>
@@ -168,7 +173,7 @@ function createProductCard(dress) {
             <div class="product-card-price">₹${dress.price.toFixed(2)}</div>
             <div class="product-card-actions">
                 <a href="dress-details.html?id=${dress.id}" class="btn btn-primary" style="width: 100%; display: block; text-align: center; margin-bottom: 8px;">View Details</a>
-                <button class="btn btn-secondary" onclick="event.stopPropagation(); handleAddToCart('${dress.id}')" style="width: 100%;">Add to Cart</button>
+                <button class="btn btn-secondary" onclick="event.stopPropagation(); handleAddToCart('${dress.id}')" style="width: 100%;" ${isSoldOut ? 'disabled' : ''}>${isSoldOut ? 'Sold Out' : 'Add to Cart'}</button>
             </div>
         </div>
     `;
@@ -185,6 +190,12 @@ function createProductCard(dress) {
 
 // Handle add to cart
 function handleAddToCart(dressId) {
+    const dress = getDressById(dressId);
+    if (dress && dress.status === 'SoldOut') {
+        alert('This dress is currently sold out.');
+        return;
+    }
+    
     const added = addToCart(dressId);
     if (added) {
         alert('Dress added to cart!');
@@ -216,13 +227,18 @@ function clearFilters() {
 }
 
 // Initialize page
-document.addEventListener('DOMContentLoaded', function() {
-    loadAllDresses();
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadAllDresses();
     
     const clearFiltersBtn = document.getElementById('clearFilters');
     if (clearFiltersBtn) {
         clearFiltersBtn.addEventListener('click', clearFilters);
     }
+    
+    // Reload when dresses are updated
+    window.addEventListener('dressesLoaded', function() {
+        loadAllDresses();
+    });
 });
 
 // Make functions available globally

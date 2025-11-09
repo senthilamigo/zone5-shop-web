@@ -1,7 +1,7 @@
 // Dress Details Page JavaScript
 
 // Load dress details from URL parameter
-function loadDressDetails() {
+async function loadDressDetails() {
     // Get dress ID from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const dressId = urlParams.get('id');
@@ -11,6 +11,8 @@ function loadDressDetails() {
         return;
     }
     
+    // Ensure dresses are loaded
+    await getDresses();
     const dress = getDressById(dressId);
     
     if (!dress) {
@@ -28,6 +30,10 @@ function renderDressDetails(dress) {
     
     if (!detailsContainer) return;
     
+    const statusClass = dress.status === 'SoldOut' ? 'status-soldout' : 'status-available';
+    const statusText = dress.status || 'Available';
+    const isSoldOut = dress.status === 'SoldOut';
+    
     detailsContainer.innerHTML = `
         <div class="dress-details-content">
             <div class="dress-details-image">
@@ -36,6 +42,10 @@ function renderDressDetails(dress) {
             <div class="dress-details-info">
                 <h1 class="dress-details-name">${dress.name}</h1>
                 <div class="dress-details-price">₹${dress.price.toFixed(2)}</div>
+                <div class="dress-details-status">
+                    <span class="detail-label">Status:</span>
+                    <span class="detail-value ${statusClass}">${statusText}</span>
+                </div>
                 <div class="dress-details-category">
                     <span class="detail-label">Category:</span>
                     <span class="detail-value">${dress.category}</span>
@@ -53,8 +63,8 @@ function renderDressDetails(dress) {
                     <p class="detail-description-text">${dress.description || 'No description available.'}</p>
                 </div>
                 <div class="dress-details-actions">
-                    <button class="btn btn-primary btn-add-to-cart" onclick="handleAddToCart('${dress.id}')">
-                        Add to Cart
+                    <button class="btn btn-primary btn-add-to-cart" onclick="handleAddToCart('${dress.id}')" ${isSoldOut ? 'disabled' : ''}>
+                        ${isSoldOut ? 'Sold Out' : 'Add to Cart'}
                     </button>
                     <a href="display.html" class="btn btn-secondary">Continue Shopping</a>
                 </div>
@@ -94,8 +104,8 @@ function handleAddToCart(dressId) {
 }
 
 // Initialize page
-document.addEventListener('DOMContentLoaded', function() {
-    loadDressDetails();
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadDressDetails();
 });
 
 // Make handleAddToCart available globally

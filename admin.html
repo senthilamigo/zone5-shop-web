@@ -80,15 +80,34 @@
                             <input type="number" id="dressPrice" min="0" step="0.01" required>
                         </div>
 
+                        <div class="form-group">
+                            <label for="dressStatus">Status *</label>
+                            <select id="dressStatus" required>
+                                <option value="Available">Available</option>
+                                <option value="SoldOut">Sold Out</option>
+                            </select>
+                        </div>
+
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary" id="submitBtn">Add Dress</button>
                             <button type="button" class="btn btn-secondary" id="cancelBtn" style="display: none;">Cancel</button>
                         </div>
                     </form>
+                    
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+                        <button type="button" class="btn btn-secondary" onclick="exportDressesToJSON()" style="width: 100%;">
+                            Export to JSON File
+                        </button>
+                        <small style="display: block; margin-top: 8px; color: #666;">
+                            Download the updated dresses data as JSON file. Replace the dresses.json file on the server with the downloaded file.
+                        </small>
+                    </div>
                 </section>
 
                 <section class="admin-inventory-section">
-                    <h2>Inventory</h2>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2>Inventory</h2>
+                    </div>
                     <div class="inventory-grid" id="inventoryGrid">
                         <!-- Inventory items will be dynamically loaded here -->
                     </div>

@@ -1,24 +1,92 @@
-// LocalStorage Utilities
+// Dress Data Management - JSON File Based
 
-// Initialize LocalStorage with empty arrays if they don't exist
-function initLocalStorage() {
-    if (!localStorage.getItem('dressesInventory')) {
-        localStorage.setItem('dressesInventory', JSON.stringify([]));
-    }
+// Global variable to store dresses loaded from JSON
+let dressesData = [];
+let dressesLoaded = false;
+
+// Initialize cart in localStorage
+function initCart() {
     if (!localStorage.getItem('cart')) {
         localStorage.setItem('cart', JSON.stringify([]));
     }
 }
 
-// Get all dresses from LocalStorage
-function getDresses() {
-    const dresses = localStorage.getItem('dressesInventory');
-    return dresses ? JSON.parse(dresses) : [];
+// Load dresses from JSON file
+async function loadDressesFromJSON() {
+    if (dressesLoaded) {
+        return dressesData;
+    }
+    
+    try {
+        const response = await fetch('dresses.json');
+        if (!response.ok) {
+            throw new Error('Failed to load dresses.json');
+        }
+        const jsonData = await response.json();
+        
+        // Merge with localStorage cache if it exists (for admin edits)
+        const cachedDresses = localStorage.getItem('dressesInventory');
+        if (cachedDresses) {
+            const cached = JSON.parse(cachedDresses);
+            // Merge: cached items override JSON items with same ID, new items from JSON are added
+            const merged = [...jsonData];
+            cached.forEach(cachedDress => {
+                const index = merged.findIndex(d => d.id === cachedDress.id);
+                if (index >= 0) {
+                    merged[index] = cachedDress;
+                } else {
+                    merged.push(cachedDress);
+                }
+            });
+            dressesData = merged;
+        } else {
+            dressesData = jsonData;
+        }
+        
+        // Ensure all dresses have status field
+        dressesData = dressesData.map(dress => {
+            if (!dress.status) {
+                dress.status = 'Available';
+            }
+            return dress;
+        });
+        
+        dressesLoaded = true;
+        return dressesData;
+    } catch (error) {
+        console.error('Error loading dresses.json:', error);
+        // Fallback to localStorage if JSON file doesn't exist
+        const cachedDresses = localStorage.getItem('dressesInventory');
+        if (cachedDresses) {
+            dressesData = JSON.parse(cachedDresses);
+            dressesLoaded = true;
+            return dressesData;
+        }
+        return [];
+    }
 }
 
-// Save a dress (add or update)
+// Get all dresses (loads from JSON if not already loaded)
+async function getDresses() {
+    if (!dressesLoaded) {
+        await loadDressesFromJSON();
+    }
+    return dressesData;
+}
+
+// Synchronous version for backward compatibility (returns cached data)
+function getDressesSync() {
+    return dressesData;
+}
+
+// Save a dress (add or update) - saves to localStorage cache
 function saveDress(dress) {
-    const dresses = getDresses();
+    // Ensure status field exists
+    if (!dress.status) {
+        dress.status = 'Available';
+    }
+    
+    const dresses = getDressesSync();
     const existingIndex = dresses.findIndex(d => d.id === dress.id);
     
     if (existingIndex >= 0) {
@@ -29,21 +97,30 @@ function saveDress(dress) {
         dresses.push(dress);
     }
     
+    // Update global cache
+    dressesData = dresses;
+    
+    // Save to localStorage as cache
     localStorage.setItem('dressesInventory', JSON.stringify(dresses));
     return dress;
 }
 
 // Delete a dress by ID
 function deleteDress(id) {
-    const dresses = getDresses();
+    const dresses = getDressesSync();
     const filtered = dresses.filter(d => d.id !== id);
+    
+    // Update global cache
+    dressesData = filtered;
+    
+    // Update localStorage cache
     localStorage.setItem('dressesInventory', JSON.stringify(filtered));
     return filtered;
 }
 
 // Get a dress by ID
 function getDressById(id) {
-    const dresses = getDresses();
+    const dresses = getDressesSync();
     return dresses.find(d => d.id === id);
 }
 
@@ -57,6 +134,12 @@ function getCart() {
 function addToCart(dressId) {
     const cart = getCart();
     const dress = getDressById(dressId);
+    
+    // Check if dress is available
+    if (dress && dress.status === 'SoldOut') {
+        alert('This dress is currently sold out.');
+        return false;
+    }
     
     if (dress && !cart.find(item => item.id === dressId)) {
         cart.push(dress);
@@ -90,250 +173,30 @@ function generateId() {
     return Date.now().toString(36) + Math.random().toString(36).substr(2);
 }
 
-// Initialize sample data
-function initSampleData() {
-    const dresses = getDresses();
-    
-    // Only initialize if inventory is empty
-    if (dresses.length > 0) {
-        return;
-    }
-    
-    let idCounter = 1;
-    const sampleDresses = [
-        // Silk Sarees
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Elegant Silk Saree - Festive",
-            image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop",
-            description: "Beautiful traditional silk saree perfect for festive occasions",
-            category: "silk sarees",
-            tags: ["festive", "traditional", "wedding"],
-            price: 8999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Designer Silk Saree - Party",
-            image: "https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?w=400&h=600&fit=crop",
-            description: "Stylish designer silk saree for parties and celebrations",
-            category: "silk sarees",
-            tags: ["party", "designer", "elegant"],
-            price: 12999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Classic Silk Saree - Traditional",
-            image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=600&fit=crop",
-            description: "Classic silk saree with traditional patterns",
-            category: "silk sarees",
-            tags: ["traditional", "classic", "wedding"],
-            price: 7999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Modern Silk Saree - Casual",
-            image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=600&fit=crop",
-            description: "Modern twist on traditional silk saree for casual wear",
-            category: "silk sarees",
-            tags: ["casual", "modern", "comfortable"],
-            price: 6999.00
-        },
-        // Anarkali Sarees
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Floral Anarkali Saree - Festive",
-            image: "https://images.unsplash.com/photo-1594633313593-bab3825d0caf?w=400&h=600&fit=crop",
-            description: "Beautiful floral print anarkali saree for festive occasions",
-            category: "anarkali sarees",
-            tags: ["festive", "floral", "elegant"],
-            price: 5999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Designer Anarkali Saree - Party",
-            image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=600&fit=crop",
-            description: "Stylish designer anarkali saree perfect for parties",
-            category: "anarkali sarees",
-            tags: ["party", "designer", "stylish"],
-            price: 8999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Traditional Anarkali Saree - Wedding",
-            image: "https://images.unsplash.com/photo-1594633312681-425c7b7b97ccd1?w=400&h=600&fit=crop",
-            description: "Traditional anarkali saree for wedding ceremonies",
-            category: "anarkali sarees",
-            tags: ["wedding", "traditional", "ceremony"],
-            price: 11999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Casual Anarkali Saree - Office",
-            image: "https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?w=400&h=600&fit=crop",
-            description: "Comfortable anarkali saree suitable for office wear",
-            category: "anarkali sarees",
-            tags: ["office", "casual", "professional"],
-            price: 4999.00
-        },
-        // Formal
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Professional Formal Dress - Office",
-            image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=600&fit=crop",
-            description: "Elegant professional formal dress for office wear",
-            category: "formal",
-            tags: ["office", "professional", "business"],
-            price: 3999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Classic Formal Dress - Party",
-            image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop",
-            description: "Classic formal dress perfect for parties and events",
-            category: "formal",
-            tags: ["party", "classic", "elegant"],
-            price: 5999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Modern Formal Dress - Casual",
-            image: "https://images.unsplash.com/photo-1594633313593-bab3825d0caf?w=400&h=600&fit=crop",
-            description: "Modern formal dress with casual appeal",
-            category: "formal",
-            tags: ["casual", "modern", "comfortable"],
-            price: 3499.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Designer Formal Dress - Festive",
-            image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=600&fit=crop",
-            description: "Designer formal dress for festive celebrations",
-            category: "formal",
-            tags: ["festive", "designer", "celebration"],
-            price: 7999.00
-        },
-        // Churidar
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Elegant Churidar Set - Festive",
-            image: "https://images.unsplash.com/photo-1594633312681-425c7b7b97ccd1?w=400&h=600&fit=crop",
-            description: "Beautiful churidar set perfect for festive occasions",
-            category: "churidar",
-            tags: ["festive", "elegant", "traditional"],
-            price: 4999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Designer Churidar Set - Party",
-            image: "https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?w=400&h=600&fit=crop",
-            description: "Stylish designer churidar set for parties",
-            category: "churidar",
-            tags: ["party", "designer", "stylish"],
-            price: 6999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Traditional Churidar Set - Wedding",
-            image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=600&fit=crop",
-            description: "Traditional churidar set for wedding ceremonies",
-            category: "churidar",
-            tags: ["wedding", "traditional", "ceremony"],
-            price: 8999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Casual Churidar Set - Office",
-            image: "https://images.unsplash.com/photo-1594633313593-bab3825d0caf?w=400&h=600&fit=crop",
-            description: "Comfortable churidar set suitable for office wear",
-            category: "churidar",
-            tags: ["office", "casual", "comfortable"],
-            price: 3999.00
-        },
-        // Additional dresses to ensure 6 sections with 4 each
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Premium Silk Saree - Wedding",
-            image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=600&fit=crop",
-            description: "Premium quality silk saree for wedding ceremonies",
-            category: "silk sarees",
-            tags: ["wedding", "premium", "luxury"],
-            price: 15999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Festive Anarkali Saree - Traditional",
-            image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop",
-            description: "Traditional anarkali saree with festive designs",
-            category: "anarkali sarees",
-            tags: ["festive", "traditional", "celebration"],
-            price: 6999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Business Formal Dress - Professional",
-            image: "https://images.unsplash.com/photo-1594633312681-425c7b7b97ccd1?w=400&h=600&fit=crop",
-            description: "Professional business formal dress for corporate events",
-            category: "formal",
-            tags: ["office", "professional", "corporate"],
-            price: 4499.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Wedding Churidar Set - Traditional",
-            image: "https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?w=400&h=600&fit=crop",
-            description: "Traditional wedding churidar set with intricate designs",
-            category: "churidar",
-            tags: ["wedding", "traditional", "intricate"],
-            price: 10999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Party Silk Saree - Elegant",
-            image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=600&fit=crop",
-            description: "Elegant silk saree perfect for party occasions",
-            category: "silk sarees",
-            tags: ["party", "elegant", "celebration"],
-            price: 9999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Office Anarkali Saree - Professional",
-            image: "https://images.unsplash.com/photo-1594633313593-bab3825d0caf?w=400&h=600&fit=crop",
-            description: "Professional anarkali saree suitable for office environment",
-            category: "anarkali sarees",
-            tags: ["office", "professional", "business"],
-            price: 5499.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Casual Formal Dress - Comfortable",
-            image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=600&fit=crop",
-            description: "Comfortable casual formal dress for everyday wear",
-            category: "formal",
-            tags: ["casual", "comfortable", "everyday"],
-            price: 2999.00
-        },
-        {
-            id: 'dress-' + (idCounter++),
-            name: "Festive Churidar Set - Celebration",
-            image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop",
-            description: "Celebration-worthy churidar set for festive occasions",
-            category: "churidar",
-            tags: ["festive", "celebration", "special"],
-            price: 5999.00
-        }
-    ];
-    
-    // Save all sample dresses
-    sampleDresses.forEach(dress => {
-        saveDress(dress);
-    });
+// Export dresses to JSON file (download)
+function exportDressesToJSON() {
+    const dresses = getDressesSync();
+    const jsonString = JSON.stringify(dresses, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'dresses.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    initLocalStorage();
-    initSampleData();
+document.addEventListener('DOMContentLoaded', async function() {
+    initCart();
+    await loadDressesFromJSON();
     updateCartCount();
+    
+    // Dispatch custom event when dresses are loaded
+    window.dispatchEvent(new CustomEvent('dressesLoaded'));
 });
 
+// Make export function available globally
+window.exportDressesToJSON = exportDressesToJSON;
