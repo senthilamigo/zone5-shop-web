@@ -11,6 +11,9 @@ function initCart() {
     }
 }
 
+// Global variable to store admin email
+let adminEmail = '';
+
 // Load dresses from JSON file
 async function loadDressesFromJSON() {
     if (dressesLoaded) {
@@ -24,12 +27,30 @@ async function loadDressesFromJSON() {
         }
         const jsonData = await response.json();
         
+        // Handle both new object format and legacy array format
+        let dressesArray = [];
+        if (Array.isArray(jsonData)) {
+            // Legacy format: just an array of dresses
+            dressesArray = jsonData;
+            adminEmail = localStorage.getItem('adminEmail') || '';
+        } else if (jsonData.dresses && Array.isArray(jsonData.dresses)) {
+            // New format: object with adminEmail and dresses
+            dressesArray = jsonData.dresses;
+            adminEmail = jsonData.adminEmail || localStorage.getItem('adminEmail') || '';
+            // Save admin email to localStorage for quick access
+            if (jsonData.adminEmail) {
+                localStorage.setItem('adminEmail', jsonData.adminEmail);
+            }
+        } else {
+            throw new Error('Invalid JSON structure');
+        }
+        
         // Merge with localStorage cache if it exists (for admin edits)
         const cachedDresses = localStorage.getItem('dressesInventory');
         if (cachedDresses) {
             const cached = JSON.parse(cachedDresses);
             // Merge: cached items override JSON items with same ID, new items from JSON are added
-            const merged = [...jsonData];
+            const merged = [...dressesArray];
             cached.forEach(cachedDress => {
                 const index = merged.findIndex(d => d.id === cachedDress.id);
                 if (index >= 0) {
@@ -40,7 +61,7 @@ async function loadDressesFromJSON() {
             });
             dressesData = merged;
         } else {
-            dressesData = jsonData;
+            dressesData = dressesArray;
         }
         
         // Ensure all dresses have status field
@@ -62,8 +83,20 @@ async function loadDressesFromJSON() {
             dressesLoaded = true;
             return dressesData;
         }
+        adminEmail = localStorage.getItem('adminEmail') || '';
         return [];
     }
+}
+
+// Get admin email
+function getAdminEmail() {
+    return adminEmail || localStorage.getItem('adminEmail') || '';
+}
+
+// Set admin email
+function setAdminEmail(email) {
+    adminEmail = email;
+    localStorage.setItem('adminEmail', email);
 }
 
 // Get all dresses (loads from JSON if not already loaded)
@@ -176,7 +209,12 @@ function generateId() {
 // Export dresses to JSON file (download)
 function exportDressesToJSON() {
     const dresses = getDressesSync();
-    const jsonString = JSON.stringify(dresses, null, 2);
+    const email = getAdminEmail();
+    const exportData = {
+        adminEmail: email,
+        dresses: dresses
+    };
+    const jsonString = JSON.stringify(exportData, null, 2);
     const blob = new Blob([jsonString], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -198,5 +236,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     window.dispatchEvent(new CustomEvent('dressesLoaded'));
 });
 
-// Make export function available globally
+// Make functions available globally
 window.exportDressesToJSON = exportDressesToJSON;
+window.getAdminEmail = getAdminEmail;
+window.setAdminEmail = setAdminEmail;
