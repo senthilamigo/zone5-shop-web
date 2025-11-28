@@ -1,9 +1,9 @@
 // Cart Page JavaScript
 
 // EmailJS configuration - replace the placeholder strings with your EmailJS credentials
-const EMAILJS_PUBLIC_KEY = window.EMAILJS_PUBLIC_KEY || 'REPLACE_WITH_PUBLIC_KEY';
-const EMAILJS_SERVICE_ID = window.EMAILJS_SERVICE_ID || 'REPLACE_WITH_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = window.EMAILJS_TEMPLATE_ID || 'REPLACE_WITH_TEMPLATE_ID';
+const EMAILJS_PUBLIC_KEY = window.EMAILJS_PUBLIC_KEY || 'm8VJiIrcKuIJV2Xfr';
+const EMAILJS_SERVICE_ID = window.EMAILJS_SERVICE_ID || 'service_jqrtm93';
+const EMAILJS_TEMPLATE_ID = window.EMAILJS_TEMPLATE_ID || 'template_h8t5u9t';
 
 // Load cart and display items
 function loadCart() {
