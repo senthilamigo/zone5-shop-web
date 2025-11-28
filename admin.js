@@ -211,18 +211,52 @@ function resetForm() {
     }
 }
 
+// Load admin email
+function loadAdminEmail() {
+    const email = getAdminEmail();
+    const emailInput = document.getElementById('adminEmail');
+    if (emailInput) {
+        emailInput.value = email;
+    }
+}
+
+// Save admin email
+function saveAdminEmail() {
+    const emailInput = document.getElementById('adminEmail');
+    if (!emailInput) return;
+    
+    const email = emailInput.value.trim();
+    if (!email) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+    
+    setAdminEmail(email);
+    alert('Admin email saved successfully!');
+}
+
 // Initialize page
 document.addEventListener('DOMContentLoaded', async function() {
     await loadInventory();
     setupForm();
+    loadAdminEmail();
     
     // Reload inventory when dresses are updated
     window.addEventListener('dressesLoaded', function() {
         loadInventory();
+        loadAdminEmail();
     });
 });
 
 // Make functions available globally
 window.editDress = editDress;
 window.deleteDressItem = deleteDressItem;
+window.saveAdminEmail = saveAdminEmail;
 
