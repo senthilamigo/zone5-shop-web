@@ -72,7 +72,7 @@ function setupForm() {
 }
 
 // Handle form submission
-function handleFormSubmit() {
+async function handleFormSubmit() {
     const name = document.getElementById('dressName').value.trim();
     const image = document.getElementById('dressImage').value.trim();
     const description = document.getElementById('dressDescription').value.trim();
@@ -105,12 +105,20 @@ function handleFormSubmit() {
         status: status
     };
     
-    saveDress(dress);
-    
-    if (editingDressId) {
-        alert('Dress updated successfully!');
-    } else {
-        alert('Dress added successfully!');
+    try {
+        const config = getGitHubConfig();
+        const saveToGitHub = config.owner && config.repo && config.token;
+        
+        await saveDress(dress, saveToGitHub);
+        
+        if (editingDressId) {
+            alert('Dress updated successfully!' + (saveToGitHub ? ' (Saved to GitHub)' : ''));
+        } else {
+            alert('Dress added successfully!' + (saveToGitHub ? ' (Saved to GitHub)' : ''));
+        }
+    } catch (error) {
+        console.error('Error saving dress:', error);
+        alert('Dress saved locally, but failed to save to GitHub: ' + error.message);
     }
     
     resetForm();
@@ -161,7 +169,7 @@ function editDress(id) {
 }
 
 // Delete dress
-function deleteDressItem(id) {
+async function deleteDressItem(id) {
     const dress = getDressById(id);
     if (!dress) {
         alert('Dress not found.');
@@ -169,17 +177,26 @@ function deleteDressItem(id) {
     }
     
     if (confirm(`Are you sure you want to delete "${dress.name}"?`)) {
-        deleteDress(id);
-        
-        // Also remove from cart if present
-        removeFromCart(id);
-        
-        alert('Dress deleted successfully!');
-        loadInventory();
-        
-        // Reset form if editing this dress
-        if (editingDressId === id) {
-            resetForm();
+        try {
+            const config = getGitHubConfig();
+            const saveToGitHub = config.owner && config.repo && config.token;
+            
+            await deleteDress(id, saveToGitHub);
+            
+            // Also remove from cart if present
+            removeFromCart(id);
+            
+            alert('Dress deleted successfully!' + (saveToGitHub ? ' (Saved to GitHub)' : ''));
+            loadInventory();
+            
+            // Reset form if editing this dress
+            if (editingDressId === id) {
+                resetForm();
+            }
+        } catch (error) {
+            console.error('Error deleting dress:', error);
+            alert('Dress deleted locally, but failed to save to GitHub: ' + error.message);
+            loadInventory();
         }
     }
 }
@@ -221,7 +238,7 @@ function loadAdminEmail() {
 }
 
 // Save admin email
-function saveAdminEmail() {
+async function saveAdminEmail() {
     const emailInput = document.getElementById('adminEmail');
     if (!emailInput) return;
     
@@ -239,7 +256,102 @@ function saveAdminEmail() {
     }
     
     setAdminEmail(email);
-    alert('Admin email saved successfully!');
+    
+    // Also save to GitHub if configured
+    const config = getGitHubConfig();
+    if (config.owner && config.repo && config.token) {
+        try {
+            const dresses = getDressesSync();
+            const exportData = {
+                adminEmail: email,
+                dresses: dresses
+            };
+            await saveFileToGitHub(exportData, 'Update admin email');
+            alert('Admin email saved successfully! (Saved to GitHub)');
+        } catch (error) {
+            console.error('Failed to save to GitHub:', error);
+            alert('Admin email saved locally, but failed to save to GitHub: ' + error.message);
+        }
+    } else {
+        alert('Admin email saved successfully!');
+    }
+}
+
+// Load GitHub configuration
+function loadGitHubConfig() {
+    const config = getGitHubConfig();
+    const ownerInput = document.getElementById('githubOwner');
+    const repoInput = document.getElementById('githubRepo');
+    const pathInput = document.getElementById('githubPath');
+    const branchInput = document.getElementById('githubBranch');
+    const tokenInput = document.getElementById('githubToken');
+    
+    if (ownerInput) ownerInput.value = config.owner;
+    if (repoInput) repoInput.value = config.repo;
+    if (pathInput) pathInput.value = config.path;
+    if (branchInput) branchInput.value = config.branch;
+    if (tokenInput) tokenInput.value = config.token;
+}
+
+// Save GitHub configuration
+function saveGitHubConfig() {
+    const ownerInput = document.getElementById('githubOwner');
+    const repoInput = document.getElementById('githubRepo');
+    const pathInput = document.getElementById('githubPath');
+    const branchInput = document.getElementById('githubBranch');
+    const tokenInput = document.getElementById('githubToken');
+    
+    if (!ownerInput || !repoInput || !pathInput || !branchInput || !tokenInput) {
+        alert('Configuration fields not found.');
+        return;
+    }
+    
+    const config = {
+        owner: ownerInput.value.trim(),
+        repo: repoInput.value.trim(),
+        path: pathInput.value.trim() || 'dresses.json',
+        branch: branchInput.value.trim() || 'main',
+        token: tokenInput.value.trim()
+    };
+    
+    if (!config.owner || !config.repo || !config.token) {
+        alert('Please fill in all required fields (Owner, Repository, and Token).');
+        return;
+    }
+    
+    setGitHubConfig(config);
+    alert('GitHub configuration saved successfully!');
+}
+
+// Test GitHub connection
+async function testGitHubConnection() {
+    const config = getGitHubConfig();
+    
+    if (!config.owner || !config.repo || !config.token) {
+        alert('Please save GitHub configuration first.');
+        return;
+    }
+    
+    try {
+        const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.branch}`;
+        const response = await fetch(url, {
+            headers: {
+                'Authorization': `token ${config.token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+        
+        if (response.ok) {
+            alert('✓ Connection successful! Repository and file are accessible.');
+        } else if (response.status === 404) {
+            alert('⚠ Connection successful, but file not found. It will be created on first save.');
+        } else {
+            const errorData = await response.json().catch(() => ({}));
+            alert('✗ Connection failed: ' + (errorData.message || response.statusText));
+        }
+    } catch (error) {
+        alert('✗ Connection failed: ' + error.message);
+    }
 }
 
 // Initialize page
@@ -247,6 +359,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     await loadInventory();
     setupForm();
     loadAdminEmail();
+    loadGitHubConfig();
     
     // Reload inventory when dresses are updated
     window.addEventListener('dressesLoaded', function() {
@@ -259,4 +372,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 window.editDress = editDress;
 window.deleteDressItem = deleteDressItem;
 window.saveAdminEmail = saveAdminEmail;
+window.saveGitHubConfig = saveGitHubConfig;
+window.testGitHubConnection = testGitHubConnection;
 
