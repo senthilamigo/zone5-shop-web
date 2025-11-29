@@ -14,18 +14,149 @@ function initCart() {
 // Global variable to store admin email
 let adminEmail = '';
 
-// Load dresses from JSON file
+// GitHub Configuration Functions
+function getGitHubConfig() {
+    return {
+        owner: localStorage.getItem('githubOwner') || '',
+        repo: localStorage.getItem('githubRepo') || '',
+        path: localStorage.getItem('githubPath') || 'dresses.json',
+        branch: localStorage.getItem('githubBranch') || 'main',
+        token: localStorage.getItem('githubToken') || ''
+    };
+}
+
+function setGitHubConfig(config) {
+    if (config.owner) localStorage.setItem('githubOwner', config.owner);
+    if (config.repo) localStorage.setItem('githubRepo', config.repo);
+    if (config.path) localStorage.setItem('githubPath', config.path);
+    if (config.branch) localStorage.setItem('githubBranch', config.branch);
+    if (config.token) localStorage.setItem('githubToken', config.token);
+}
+
+// Load file from GitHub repository
+async function loadFileFromGitHub() {
+    const config = getGitHubConfig();
+    
+    if (!config.owner || !config.repo || !config.token) {
+        throw new Error('GitHub configuration is incomplete');
+    }
+    
+    const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.branch}`;
+    
+    const response = await fetch(url, {
+        headers: {
+            'Authorization': `token ${config.token}`,
+            'Accept': 'application/vnd.github.v3+json'
+        }
+    });
+    
+    if (!response.ok) {
+        if (response.status === 404) {
+            throw new Error('File not found in repository');
+        }
+        throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    
+    // Decode base64 content
+    const content = atob(data.content.replace(/\s/g, ''));
+    return JSON.parse(content);
+}
+
+// Save file to GitHub repository
+async function saveFileToGitHub(jsonData, commitMessage = 'Update dresses.json') {
+    const config = getGitHubConfig();
+    
+    if (!config.owner || !config.repo || !config.token) {
+        throw new Error('GitHub configuration is incomplete');
+    }
+    
+    // First, get the current file to get its SHA (required for update)
+    let sha = null;
+    try {
+        const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.branch}`;
+        const response = await fetch(url, {
+            headers: {
+                'Authorization': `token ${config.token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            sha = data.sha;
+        }
+    } catch (error) {
+        // File doesn't exist yet, that's okay
+        console.log('File does not exist, will create new file');
+    }
+    
+    // Encode content to base64
+    const content = btoa(JSON.stringify(jsonData, null, 2));
+    
+    const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}`;
+    
+    const body = {
+        message: commitMessage,
+        content: content,
+        branch: config.branch
+    };
+    
+    if (sha) {
+        body.sha = sha;
+    }
+    
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `token ${config.token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    });
+    
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(`Failed to save to GitHub: ${response.status} ${response.statusText}. ${errorData.message || ''}`);
+    }
+    
+    return await response.json();
+}
+
+// Load dresses from JSON file (GitHub or local fallback)
 async function loadDressesFromJSON() {
     if (dressesLoaded) {
         return dressesData;
     }
     
     try {
-        const response = await fetch('dresses.json');
-        if (!response.ok) {
-            throw new Error('Failed to load dresses.json');
+        let jsonData;
+        const config = getGitHubConfig();
+        
+        // Try GitHub first if configured
+        if (config.owner && config.repo && config.token) {
+            try {
+                jsonData = await loadFileFromGitHub();
+                console.log('Loaded dresses from GitHub repository');
+            } catch (error) {
+                console.warn('Failed to load from GitHub, trying local file:', error);
+                // Fallback to local file
+                const response = await fetch('dresses.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load dresses.json');
+                }
+                jsonData = await response.json();
+            }
+        } else {
+            // Load from local file
+            const response = await fetch('dresses.json');
+            if (!response.ok) {
+                throw new Error('Failed to load dresses.json');
+            }
+            jsonData = await response.json();
         }
-        const jsonData = await response.json();
         
         // Handle both new object format and legacy array format
         let dressesArray = [];
@@ -112,8 +243,8 @@ function getDressesSync() {
     return dressesData;
 }
 
-// Save a dress (add or update) - saves to localStorage cache
-function saveDress(dress) {
+// Save a dress (add or update) - saves to localStorage cache and optionally to GitHub
+async function saveDress(dress, saveToGitHub = false) {
     // Ensure status field exists
     if (!dress.status) {
         dress.status = 'Available';
@@ -135,12 +266,29 @@ function saveDress(dress) {
     
     // Save to localStorage as cache
     localStorage.setItem('dressesInventory', JSON.stringify(dresses));
+    
+    // Save to GitHub if requested
+    if (saveToGitHub) {
+        try {
+            const email = getAdminEmail();
+            const exportData = {
+                adminEmail: email,
+                dresses: dresses
+            };
+            await saveFileToGitHub(exportData, `Update dress: ${dress.name}`);
+        } catch (error) {
+            console.error('Failed to save to GitHub:', error);
+            throw error;
+        }
+    }
+    
     return dress;
 }
 
 // Delete a dress by ID
-function deleteDress(id) {
+async function deleteDress(id, saveToGitHub = false) {
     const dresses = getDressesSync();
+    const dressToDelete = dresses.find(d => d.id === id);
     const filtered = dresses.filter(d => d.id !== id);
     
     // Update global cache
@@ -148,6 +296,22 @@ function deleteDress(id) {
     
     // Update localStorage cache
     localStorage.setItem('dressesInventory', JSON.stringify(filtered));
+    
+    // Save to GitHub if requested
+    if (saveToGitHub) {
+        try {
+            const email = getAdminEmail();
+            const exportData = {
+                adminEmail: email,
+                dresses: filtered
+            };
+            await saveFileToGitHub(exportData, `Delete dress: ${dressToDelete ? dressToDelete.name : id}`);
+        } catch (error) {
+            console.error('Failed to save to GitHub:', error);
+            throw error;
+        }
+    }
+    
     return filtered;
 }
 
@@ -206,14 +370,30 @@ function generateId() {
     return Date.now().toString(36) + Math.random().toString(36).substr(2);
 }
 
-// Export dresses to JSON file (download)
-function exportDressesToJSON() {
+// Export dresses to JSON file (save to GitHub or download)
+async function exportDressesToJSON() {
     const dresses = getDressesSync();
     const email = getAdminEmail();
     const exportData = {
         adminEmail: email,
         dresses: dresses
     };
+    
+    const config = getGitHubConfig();
+    
+    // If GitHub is configured, save to GitHub
+    if (config.owner && config.repo && config.token) {
+        try {
+            await saveFileToGitHub(exportData, 'Export dresses data');
+            alert('Dresses data saved to GitHub repository successfully!');
+            return;
+        } catch (error) {
+            console.error('Failed to save to GitHub:', error);
+            alert('Failed to save to GitHub: ' + error.message + '\nFalling back to download.');
+        }
+    }
+    
+    // Fallback to download
     const jsonString = JSON.stringify(exportData, null, 2);
     const blob = new Blob([jsonString], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -240,3 +420,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 window.exportDressesToJSON = exportDressesToJSON;
 window.getAdminEmail = getAdminEmail;
 window.setAdminEmail = setAdminEmail;
+window.getGitHubConfig = getGitHubConfig;
+window.setGitHubConfig = setGitHubConfig;
+window.loadFileFromGitHub = loadFileFromGitHub;
+window.saveFileToGitHub = saveFileToGitHub;

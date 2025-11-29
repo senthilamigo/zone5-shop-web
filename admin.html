@@ -109,6 +109,32 @@
                         <h2>Inventory</h2>
                     </div>
                     <div style="margin-bottom: 20px; padding: 15px; background-color: #f5f5f5; border-radius: 4px;">
+                        <h3 style="margin-bottom: 15px; font-size: 16px;">GitHub Repository Configuration</h3>
+                        <div style="margin-bottom: 10px;">
+                            <label for="githubOwner" style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 12px;">Repository Owner *</label>
+                            <input type="text" id="githubOwner" placeholder="username" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <label for="githubRepo" style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 12px;">Repository Name *</label>
+                            <input type="text" id="githubRepo" placeholder="repo-name" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <label for="githubPath" style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 12px;">File Path *</label>
+                            <input type="text" id="githubPath" placeholder="dresses.json" value="dresses.json" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <label for="githubBranch" style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 12px;">Branch *</label>
+                            <input type="text" id="githubBranch" placeholder="main" value="main" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <label for="githubToken" style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 12px;">Personal Access Token (PAT) *</label>
+                            <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                            <small style="display: block; margin-top: 5px; color: #666; font-size: 11px;">GitHub PAT with repo permissions. Keep this secure!</small>
+                        </div>
+                        <button type="button" class="btn btn-secondary" onclick="saveGitHubConfig()" style="width: 100%; margin-top: 10px;">Save GitHub Config</button>
+                        <button type="button" class="btn btn-secondary" onclick="testGitHubConnection()" style="width: 100%; margin-top: 5px; background-color: #4CAF50;">Test Connection</button>
+                    </div>
+                    <div style="margin-bottom: 20px; padding: 15px; background-color: #f5f5f5; border-radius: 4px;">
                         <label for="adminEmail" style="display: block; margin-bottom: 8px; font-weight: bold;">Admin Email Id</label>
                         <input type="email" id="adminEmail" placeholder="admin@example.com" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
                         <small style="display: block; margin-top: 5px; color: #666;">Email address to receive order notifications</small>
