@@ -49,8 +49,17 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="dressImage">Image Link (URL) *</label>
-                            <input type="url" id="dressImage" required>
+                            <label for="dressImage">Image *</label>
+                            <input type="file" id="dressImage" accept="image/*" style="display: none;">
+                            <button type="button" class="btn btn-secondary" id="uploadImageBtn" onclick="document.getElementById('dressImage').click()" style="width: 100%; margin-bottom: 10px;">
+                                Choose Image to Upload
+                            </button>
+                            <div id="imagePreview" style="margin-top: 10px; display: none;">
+                                <img id="previewImg" src="" alt="Preview" style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px;">
+                                <p id="imageFileName" style="margin-top: 5px; color: #666; font-size: 12px;"></p>
+                            </div>
+                            <input type="hidden" id="dressImageUrl">
+                            <small style="display: block; margin-top: 5px; color: #666;">Image will be uploaded to GitHub repository</small>
                         </div>
 
                         <div class="form-group">
