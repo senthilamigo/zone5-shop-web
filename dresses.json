@@ -386,6 +386,18 @@
       ],
       "price": 1000,
       "status": "Available"
+    },
+    {
+      "id": "mildu5v3v6gl0alu1xk",
+      "name": "Dress 3",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1764486721102.png",
+      "description": "good dress",
+      "category": "formal",
+      "tags": [
+        "casual"
+      ],
+      "price": 800,
+      "status": "Available"
     }
   ]
 }
