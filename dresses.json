@@ -374,6 +374,18 @@
       ],
       "price": 500,
       "status": "Available"
+    },
+    {
+      "id": "milcy5acbkzzj3zenbs",
+      "name": "dress 2",
+      "image": "https://github.com/senthilamigo/zone5-shop-web/blob/main/piclumen-1748893736810.png",
+      "description": "new dress",
+      "category": "formal",
+      "tags": [
+        "casual"
+      ],
+      "price": 1000,
+      "status": "Available"
     }
   ]
 }
