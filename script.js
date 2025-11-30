@@ -433,19 +433,7 @@ async function exportDressesToJSON() {
         dresses: dresses
     };
     
-    const config = getGitHubConfig();
-    
-    // If GitHub is configured, save to GitHub
-    if (config.owner && config.repo && config.token) {
-        try {
-            await saveFileToGitHub(exportData, 'Export dresses data');
-        } catch (error) {
-            console.error('Failed to save to GitHub:', error);
-            alert('Failed to save to GitHub: ' + error.message + '\nFiles will still be downloaded locally.');
-        }
-    }
-    
-    // Always download JSON file locally
+    // Download JSON file locally
     const jsonString = JSON.stringify(exportData, null, 2);
     const jsonBlob = new Blob([jsonString], { type: 'application/json' });
     const jsonUrl = URL.createObjectURL(jsonBlob);
@@ -469,6 +457,147 @@ async function exportDressesToJSON() {
     }
 }
 
+// Import from Excel and save to GitHub
+async function importFromExcel() {
+    // Check if XLSX library is available
+    if (typeof XLSX === 'undefined') {
+        alert('XLSX library not loaded. Please refresh the page.');
+        return;
+    }
+    
+    // Check GitHub configuration
+    const config = getGitHubConfig();
+    if (!config.owner || !config.repo || !config.token) {
+        alert('Please configure GitHub settings first (Repository Owner, Repository Name, Branch, and Personal Access Token).');
+        return;
+    }
+    
+    // Create file input element
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.xlsx,.xls';
+    fileInput.style.display = 'none';
+    
+    fileInput.addEventListener('change', async function(e) {
+        const file = e.target.files[0];
+        if (!file) {
+            document.body.removeChild(fileInput);
+            return;
+        }
+        
+        try {
+            // Show loading message
+            const submitBtn = document.getElementById('importExcelBtn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Processing...';
+            }
+            
+            // Read Excel file
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    
+                    // Get first sheet
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    
+                    // Convert to JSON
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet);
+                    
+                    // Convert Excel format to dresses format
+                    const dresses = jsonData.map((row, index) => {
+                        // Parse tags if it's a string
+                        let tags = [];
+                        if (row['Tags']) {
+                            if (typeof row['Tags'] === 'string') {
+                                tags = row['Tags'].split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
+                            } else if (Array.isArray(row['Tags'])) {
+                                tags = row['Tags'];
+                            }
+                        }
+                        
+                        return {
+                            id: row['ID'] || `dress-${Date.now()}-${index}`,
+                            name: row['Name'] || '',
+                            image: row['Image URL'] || '',
+                            description: row['Description'] || '',
+                            category: row['Category'] || '',
+                            tags: tags,
+                            price: parseFloat(row['Price (₹)']) || 0,
+                            status: row['Status'] || 'Available'
+                        };
+                    });
+                    
+                    // Get admin email (keep existing if available)
+                    const existingEmail = getAdminEmail();
+                    const exportData = {
+                        adminEmail: existingEmail,
+                        dresses: dresses
+                    };
+                    
+                    // Save to GitHub
+                    await saveFileToGitHub(exportData, 'Import dresses from Excel file');
+                    
+                    // Update dresses data
+                    dressesData = dresses;
+                    dressesLoaded = true;
+                    adminEmail = existingEmail;
+                    
+                    // Update localStorage
+                    localStorage.setItem('dressesInventory', JSON.stringify(dresses));
+                    if (existingEmail) {
+                        localStorage.setItem('adminEmail', existingEmail);
+                    }
+                    
+                    // Dispatch event to reload inventory
+                    window.dispatchEvent(new CustomEvent('dressesLoaded'));
+                    
+                    alert(`Successfully imported ${dresses.length} dresses from Excel and saved to GitHub repository as dresses.json!`);
+                } catch (error) {
+                    console.error('Error processing Excel file:', error);
+                    alert('Failed to process Excel file: ' + error.message);
+                } finally {
+                    // Clean up
+                    document.body.removeChild(fileInput);
+                    const submitBtn = document.getElementById('importExcelBtn');
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Import from Excel';
+                    }
+                }
+            };
+            
+            reader.onerror = function() {
+                alert('Failed to read Excel file.');
+                document.body.removeChild(fileInput);
+                const submitBtn = document.getElementById('importExcelBtn');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Import from Excel';
+                }
+            };
+            
+            reader.readAsArrayBuffer(file);
+        } catch (error) {
+            console.error('Error reading file:', error);
+            alert('Failed to read file: ' + error.message);
+            document.body.removeChild(fileInput);
+            const submitBtn = document.getElementById('importExcelBtn');
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Import from Excel';
+            }
+        }
+    });
+    
+    // Trigger file selection
+    document.body.appendChild(fileInput);
+    fileInput.click();
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', async function() {
     initCart();
@@ -481,6 +610,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 // Make functions available globally
 window.exportDressesToJSON = exportDressesToJSON;
+window.importFromExcel = importFromExcel;
 window.getAdminEmail = getAdminEmail;
 window.setAdminEmail = setAdminEmail;
 window.getGitHubConfig = getGitHubConfig;

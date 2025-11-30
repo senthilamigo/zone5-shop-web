@@ -104,11 +104,17 @@
                     </form>
                     
                     <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
-                        <button type="button" class="btn btn-secondary" onclick="exportDressesToJSON()" style="width: 100%;">
+                        <button type="button" class="btn btn-secondary" onclick="exportDressesToJSON()" style="width: 100%; margin-bottom: 10px;">
                             Export to JSON & Excel
                         </button>
+                        <small style="display: block; margin-bottom: 15px; color: #666;">
+                            Download the updated dresses data as JSON and Excel files.
+                        </small>
+                        <button type="button" class="btn btn-secondary" id="importExcelBtn" onclick="importFromExcel()" style="width: 100%;">
+                            Import from Excel
+                        </button>
                         <small style="display: block; margin-top: 8px; color: #666;">
-                            Download the updated dresses data as JSON and Excel files. The JSON file can be used to replace the dresses.json file on the server.
+                            Upload an Excel file to convert it to JSON format and save it to GitHub repository as dresses.json. Make sure GitHub settings are configured.
                         </small>
                     </div>
                 </section>
