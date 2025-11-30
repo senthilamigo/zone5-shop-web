@@ -12,7 +12,8 @@
         "traditional",
         "wedding"
       ],
-      "price": 8999
+      "price": 8999,
+      "status": "Available"
     },
     {
       "id": "dress-2",
@@ -25,7 +26,8 @@
         "designer",
         "elegant"
       ],
-      "price": 12999
+      "price": 12999,
+      "status": "Available"
     },
     {
       "id": "dress-3",
@@ -38,7 +40,8 @@
         "classic",
         "wedding"
       ],
-      "price": 7999
+      "price": 7999,
+      "status": "Available"
     },
     {
       "id": "dress-4",
@@ -51,7 +54,8 @@
         "modern",
         "comfortable"
       ],
-      "price": 6999
+      "price": 6999,
+      "status": "Available"
     },
     {
       "id": "dress-5",
@@ -64,7 +68,8 @@
         "floral",
         "elegant"
       ],
-      "price": 5999
+      "price": 5999,
+      "status": "Available"
     },
     {
       "id": "dress-6",
@@ -77,7 +82,8 @@
         "designer",
         "stylish"
       ],
-      "price": 8999
+      "price": 8999,
+      "status": "Available"
     },
     {
       "id": "dress-7",
@@ -90,7 +96,8 @@
         "traditional",
         "ceremony"
       ],
-      "price": 11999
+      "price": 11999,
+      "status": "Available"
     },
     {
       "id": "dress-8",
@@ -103,7 +110,8 @@
         "casual",
         "professional"
       ],
-      "price": 4999
+      "price": 4999,
+      "status": "Available"
     },
     {
       "id": "dress-9",
@@ -116,7 +124,8 @@
         "professional",
         "business"
       ],
-      "price": 3999
+      "price": 3999,
+      "status": "Available"
     },
     {
       "id": "dress-10",
@@ -129,7 +138,8 @@
         "classic",
         "elegant"
       ],
-      "price": 5999
+      "price": 5999,
+      "status": "Available"
     },
     {
       "id": "dress-11",
@@ -142,7 +152,8 @@
         "modern",
         "comfortable"
       ],
-      "price": 3499
+      "price": 3499,
+      "status": "Available"
     },
     {
       "id": "dress-12",
@@ -155,7 +166,8 @@
         "designer",
         "celebration"
       ],
-      "price": 7999
+      "price": 7999,
+      "status": "Available"
     },
     {
       "id": "dress-13",
@@ -168,7 +180,8 @@
         "elegant",
         "traditional"
       ],
-      "price": 4999
+      "price": 4999,
+      "status": "Available"
     },
     {
       "id": "dress-14",
@@ -181,7 +194,8 @@
         "designer",
         "stylish"
       ],
-      "price": 6999
+      "price": 6999,
+      "status": "Available"
     },
     {
       "id": "dress-15",
@@ -194,7 +208,8 @@
         "traditional",
         "ceremony"
       ],
-      "price": 8999
+      "price": 8999,
+      "status": "Available"
     },
     {
       "id": "dress-16",
@@ -207,7 +222,8 @@
         "casual",
         "comfortable"
       ],
-      "price": 3999
+      "price": 3999,
+      "status": "Available"
     },
     {
       "id": "dress-17",
@@ -220,7 +236,8 @@
         "premium",
         "luxury"
       ],
-      "price": 15999
+      "price": 15999,
+      "status": "Available"
     },
     {
       "id": "dress-18",
@@ -233,7 +250,8 @@
         "traditional",
         "celebration"
       ],
-      "price": 6999
+      "price": 6999,
+      "status": "Available"
     },
     {
       "id": "dress-19",
@@ -246,7 +264,8 @@
         "professional",
         "corporate"
       ],
-      "price": 4499
+      "price": 4499,
+      "status": "Available"
     },
     {
       "id": "dress-20",
@@ -259,7 +278,8 @@
         "traditional",
         "intricate"
       ],
-      "price": 10999
+      "price": 10999,
+      "status": "Available"
     },
     {
       "id": "dress-21",
@@ -272,7 +292,8 @@
         "elegant",
         "celebration"
       ],
-      "price": 9999
+      "price": 9999,
+      "status": "Available"
     },
     {
       "id": "dress-22",
@@ -285,7 +306,8 @@
         "professional",
         "business"
       ],
-      "price": 5499
+      "price": 5499,
+      "status": "Available"
     },
     {
       "id": "dress-23",
@@ -298,7 +320,8 @@
         "comfortable",
         "everyday"
       ],
-      "price": 2999
+      "price": 2999,
+      "status": "Available"
     },
     {
       "id": "dress-24",
@@ -311,7 +334,46 @@
         "celebration",
         "special"
       ],
-      "price": 5999
+      "price": 5999,
+      "status": "Available"
+    },
+    {
+      "id": "mhrg0zofoubf5ksh4le",
+      "name": "kanchipuram silk saree",
+      "image": "https://www.shutterstock.com/shutterstock/photos/2617460613/display_1500/stock-photo-indoor-photo-of-happy-tamil-year-girl-wearing-kanchipuram-silk-saree-with-shopping-bags-2617460613.jpg",
+      "description": "High quality silk saree",
+      "category": "silk sarees",
+      "tags": [
+        "festive",
+        "traditional"
+      ],
+      "price": 5000,
+      "status": "Available"
+    },
+    {
+      "id": "mikhvlk7opz2dqmz02",
+      "name": "new modern dress",
+      "image": "https://lh3.googleusercontent.com/pw/AP1GczMvAH0vPxwq-SCR70g_t2nGGpDHDDzs9_Xv-9keQrEy5q-B1S4nGOQ=w494-h879-s-no-gm?authuser=0?authuser=0",
+      "description": "good modern dess",
+      "category": "churidar",
+      "tags": [
+        "casual",
+        "elegant"
+      ],
+      "price": 100,
+      "status": "Available"
+    },
+    {
+      "id": "miknmjm3hnsb421nu1b",
+      "name": "next gen dress",
+      "image": "https://photos.fife.usercontent.google.com/pw/AP1GczMZcdTYVXD75gQdJO7bDe6NuEq4Vfyz0pHDVb492-RfuslokcVPd4w=w494-h879-s-no-gm?authuser=0",
+      "description": "nice collection of dresses",
+      "category": "formal",
+      "tags": [
+        "formal"
+      ],
+      "price": 500,
+      "status": "Available"
     }
   ]
 }
