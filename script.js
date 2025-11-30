@@ -371,6 +371,60 @@ function generateId() {
 }
 
 // Export dresses to JSON file (save to GitHub or download)
+// Convert dresses data to Excel format
+function exportDressesToExcel(dresses) {
+    // Check if XLSX library is available
+    if (typeof XLSX === 'undefined') {
+        throw new Error('XLSX library not loaded. Please refresh the page.');
+    }
+    
+    // Prepare data for Excel
+    const excelData = dresses.map(dress => ({
+        'ID': dress.id || '',
+        'Name': dress.name || '',
+        'Image URL': dress.image || '',
+        'Description': dress.description || '',
+        'Category': dress.category || '',
+        'Tags': dress.tags ? dress.tags.join(', ') : '',
+        'Price (₹)': dress.price || 0,
+        'Status': dress.status || 'Available'
+    }));
+    
+    // Create workbook and worksheet
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(excelData);
+    
+    // Set column widths
+    const colWidths = [
+        { wch: 15 }, // ID
+        { wch: 30 }, // Name
+        { wch: 50 }, // Image URL
+        { wch: 40 }, // Description
+        { wch: 20 }, // Category
+        { wch: 30 }, // Tags
+        { wch: 12 }, // Price
+        { wch: 12 }  // Status
+    ];
+    ws['!cols'] = colWidths;
+    
+    // Add worksheet to workbook
+    XLSX.utils.book_append_sheet(wb, ws, 'Dresses');
+    
+    // Generate Excel file
+    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    
+    // Download Excel file
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'dresses.xlsx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
 async function exportDressesToJSON() {
     const dresses = getDressesSync();
     const email = getAdminEmail();
@@ -385,25 +439,34 @@ async function exportDressesToJSON() {
     if (config.owner && config.repo && config.token) {
         try {
             await saveFileToGitHub(exportData, 'Export dresses data');
-            alert('Dresses data saved to GitHub repository successfully!');
-            return;
         } catch (error) {
             console.error('Failed to save to GitHub:', error);
-            alert('Failed to save to GitHub: ' + error.message + '\nFalling back to download.');
+            alert('Failed to save to GitHub: ' + error.message + '\nFiles will still be downloaded locally.');
         }
     }
     
-    // Fallback to download
+    // Always download JSON file locally
     const jsonString = JSON.stringify(exportData, null, 2);
-    const blob = new Blob([jsonString], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'dresses.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    const jsonBlob = new Blob([jsonString], { type: 'application/json' });
+    const jsonUrl = URL.createObjectURL(jsonBlob);
+    const jsonLink = document.createElement('a');
+    jsonLink.href = jsonUrl;
+    jsonLink.download = 'dresses.json';
+    document.body.appendChild(jsonLink);
+    jsonLink.click();
+    document.body.removeChild(jsonLink);
+    URL.revokeObjectURL(jsonUrl);
+    
+    // Also download Excel file
+    try {
+        // Small delay to ensure JSON download starts first
+        setTimeout(() => {
+            exportDressesToExcel(dresses);
+        }, 100);
+    } catch (error) {
+        console.error('Failed to export to Excel:', error);
+        alert('JSON file downloaded, but Excel export failed: ' + error.message);
+    }
 }
 
 // Initialize on page load
