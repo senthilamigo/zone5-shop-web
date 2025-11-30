@@ -105,10 +105,10 @@
                     
                     <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
                         <button type="button" class="btn btn-secondary" onclick="exportDressesToJSON()" style="width: 100%;">
-                            Export to JSON File
+                            Export to JSON & Excel
                         </button>
                         <small style="display: block; margin-top: 8px; color: #666;">
-                            Download the updated dresses data as JSON file. Replace the dresses.json file on the server with the downloaded file.
+                            Download the updated dresses data as JSON and Excel files. The JSON file can be used to replace the dresses.json file on the server.
                         </small>
                     </div>
                 </section>
@@ -197,6 +197,7 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="script.js"></script>
     <script src="admin.js"></script>
 </body>
