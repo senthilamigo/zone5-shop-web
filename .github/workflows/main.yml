@@ -8,4 +8,4 @@ jobs:
       run: node script.js
       env:
         # Map the GitHub secret to an environment variable name (e.g., NODE_API_KEY)
-        NODE_API_KEY: ${{ secrets.PAT_TOKEN }} 
+        PAT_TOKEN_KEY: ${{ secrets.PAT_TOKEN }} 
