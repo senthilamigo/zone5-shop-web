@@ -468,89 +468,12 @@ async function saveAdminEmail() {
     }
 }
 
-// Load GitHub configuration
-function loadGitHubConfig() {
-    const config = getGitHubConfig();
-    const ownerInput = document.getElementById('githubOwner');
-    const repoInput = document.getElementById('githubRepo');
-    const pathInput = document.getElementById('githubPath');
-    const branchInput = document.getElementById('githubBranch');
-    const tokenInput = document.getElementById('githubToken');
-    
-    if (ownerInput) ownerInput.value = config.owner;
-    if (repoInput) repoInput.value = config.repo;
-    if (pathInput) pathInput.value = config.path;
-    if (branchInput) branchInput.value = config.branch;
-    if (tokenInput) tokenInput.value = config.token;
-}
-
-// Save GitHub configuration
-function saveGitHubConfig() {
-    const ownerInput = document.getElementById('githubOwner');
-    const repoInput = document.getElementById('githubRepo');
-    const pathInput = document.getElementById('githubPath');
-    const branchInput = document.getElementById('githubBranch');
-    const tokenInput = document.getElementById('githubToken');
-    
-    if (!ownerInput || !repoInput || !pathInput || !branchInput || !tokenInput) {
-        alert('Configuration fields not found.');
-        return;
-    }
-    
-    const config = {
-        owner: ownerInput.value.trim(),
-        repo: repoInput.value.trim(),
-        path: pathInput.value.trim() || 'dresses.json',
-        branch: branchInput.value.trim() || 'main',
-        token: tokenInput.value.trim()
-    };
-    
-    if (!config.owner || !config.repo || !config.token) {
-        alert('Please fill in all required fields (Owner, Repository, and Token).');
-        return;
-    }
-    
-    setGitHubConfig(config);
-    alert('GitHub configuration saved successfully!');
-}
-
-// Test GitHub connection
-async function testGitHubConnection() {
-    const config = getGitHubConfig();
-    
-    if (!config.owner || !config.repo || !config.token) {
-        alert('Please save GitHub configuration first.');
-        return;
-    }
-    
-    try {
-        const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.branch}`;
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': `token ${config.token}`,
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        });
-        
-        if (response.ok) {
-            alert('✓ Connection successful! Repository and file are accessible.');
-        } else if (response.status === 404) {
-            alert('⚠ Connection successful, but file not found. It will be created on first save.');
-        } else {
-            const errorData = await response.json().catch(() => ({}));
-            alert('✗ Connection failed: ' + (errorData.message || response.statusText));
-        }
-    } catch (error) {
-        alert('✗ Connection failed: ' + error.message);
-    }
-}
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', async function() {
     await loadInventory();
     setupForm();
     loadAdminEmail();
-    loadGitHubConfig();
     
     // Reload inventory when dresses are updated
     window.addEventListener('dressesLoaded', function() {
@@ -563,6 +486,4 @@ document.addEventListener('DOMContentLoaded', async function() {
 window.editDress = editDress;
 window.deleteDressItem = deleteDressItem;
 window.saveAdminEmail = saveAdminEmail;
-window.saveGitHubConfig = saveGitHubConfig;
-window.testGitHubConnection = testGitHubConnection;
 

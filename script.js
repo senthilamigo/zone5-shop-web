@@ -14,23 +14,23 @@ function initCart() {
 // Global variable to store admin email
 let adminEmail = '';
 
-// GitHub Configuration Functions
+// GitHub Configuration Functions - Hardcoded Configuration
+const GITHUB_CONFIG = {
+    owner: 'senthilamigo', // Set your GitHub username here
+    repo: 'zone5-shop-web', // Set your repository name here
+    path: 'dresses.json',
+    branch: 'main',
+    token: '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' // Set your GitHub Personal Access Token here
+};
+
 function getGitHubConfig() {
-    return {
-        owner: localStorage.getItem('githubOwner') || '',
-        repo: localStorage.getItem('githubRepo') || '',
-        path: localStorage.getItem('githubPath') || 'dresses.json',
-        branch: localStorage.getItem('githubBranch') || 'main',
-        token: localStorage.getItem('githubToken') || ''
-    };
+    return GITHUB_CONFIG;
 }
 
 function setGitHubConfig(config) {
-    if (config.owner) localStorage.setItem('githubOwner', config.owner);
-    if (config.repo) localStorage.setItem('githubRepo', config.repo);
-    if (config.path) localStorage.setItem('githubPath', config.path);
-    if (config.branch) localStorage.setItem('githubBranch', config.branch);
-    if (config.token) localStorage.setItem('githubToken', config.token);
+    // Configuration is now hardcoded, this function is kept for backward compatibility
+    // but does nothing
+    console.warn('setGitHubConfig() called but configuration is hardcoded. Update GITHUB_CONFIG constant in script.js to change configuration.');
 }
 
 // Load file from GitHub repository
