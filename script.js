@@ -20,7 +20,7 @@ const GITHUB_CONFIG = {
     repo: 'zone5-shop-web', // Set your repository name here
     path: 'dresses.json',
     branch: 'main',
-    token: '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' // Set your GitHub Personal Access Token here
+    token: 'process.env.PAT_TOKEN_KEY' // Set your GitHub Personal Access Token here
 };
 
 function getGitHubConfig() {
