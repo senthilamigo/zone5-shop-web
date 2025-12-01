@@ -24,6 +24,7 @@ const GITHUB_CONFIG = {
 };
 
 function getGitHubConfig() {
+    console.log("token is ${config.token} ");
     return GITHUB_CONFIG;
 }
 
