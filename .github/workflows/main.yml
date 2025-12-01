@@ -1,3 +1,11 @@
+name: Use Repository Secret
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
   my-job:
     runs-on: ubuntu-latest
