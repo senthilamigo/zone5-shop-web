@@ -410,6 +410,19 @@
       ],
       "price": 5000,
       "status": "Available"
+    },
+    {
+      "id": "minfxqd1d52fmrbl7b",
+      "name": "Premium Chanderi Silk Block Print Saree",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1764611179711.jpg",
+      "description": "Premium Chanderi Silk Block Print Saree\n\nFabric: Premium Chanderi Silk\nWork: Hand Block Print\nColor: Wine/Magenta with Olive-Gold contrast\nBorder: Black & Gold block-printed design\nTexture: Soft, lightweight & glossy\n\nHighlights\nLightweight & easy to drape\nNatural Chanderi sheen\nElegant hand-block motifs\nFestive premium finish\nBreathable & comfortable\n\n Look & Feel\n Traditional, classy & festive\n Soft, airy texture\n Flows beautifully with a graceful fall\n\nCare\n Gentle hand wash / dry clean\n Do not wring\n Store away from direct sunlight",
+      "category": "anarkali sarees",
+      "tags": [
+        "traditional",
+        "festive"
+      ],
+      "price": 2199,
+      "status": "Available"
     }
   ]
 }
