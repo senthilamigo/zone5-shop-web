@@ -419,6 +419,64 @@ function resetForm() {
     }
 }
 
+// Load GitHub token
+function loadGitHubToken() {
+    const config = getGitHubConfig();
+    const tokenInput = document.getElementById('githubToken');
+    if (tokenInput) {
+        tokenInput.value = config.token || '';
+    }
+}
+
+// Save GitHub token
+function saveGitHubToken() {
+    const tokenInput = document.getElementById('githubToken');
+    if (!tokenInput) {
+        alert('Token field not found.');
+        return;
+    }
+    
+    const token = tokenInput.value.trim();
+    if (!token) {
+        alert('Please enter a GitHub Personal Access Token.');
+        return;
+    }
+    
+    setGitHubConfig({ token: token });
+    alert('GitHub token saved successfully!');
+}
+
+// Test GitHub connection
+async function testGitHubConnection() {
+    const config = getGitHubConfig();
+    
+    if (!config.owner || !config.repo || !config.token) {
+        alert('Please save GitHub token first.');
+        return;
+    }
+    
+    try {
+        const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.branch}`;
+        const response = await fetch(url, {
+            headers: {
+                'Authorization': `token ${config.token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+        
+        if (response.ok) {
+            alert('✓ Connection successful! Repository and file are accessible.');
+        } else if (response.status === 404) {
+            alert('⚠ Connection successful, but file not found. It will be created on first save.');
+        } else {
+            const errorData = await response.json().catch(() => ({}));
+            alert('✗ Connection failed: ' + (errorData.message || response.statusText));
+        }
+    } catch (error) {
+        alert('✗ Connection failed: ' + error.message);
+    }
+}
+
 // Load admin email
 function loadAdminEmail() {
     const email = getAdminEmail();
@@ -474,6 +532,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     await loadInventory();
     setupForm();
     loadAdminEmail();
+    loadGitHubToken();
     
     // Reload inventory when dresses are updated
     window.addEventListener('dressesLoaded', function() {
@@ -486,4 +545,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 window.editDress = editDress;
 window.deleteDressItem = deleteDressItem;
 window.saveAdminEmail = saveAdminEmail;
+window.saveGitHubToken = saveGitHubToken;
+window.testGitHubConnection = testGitHubConnection;
 

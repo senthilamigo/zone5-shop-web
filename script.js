@@ -14,24 +14,30 @@ function initCart() {
 // Global variable to store admin email
 let adminEmail = '';
 
-// GitHub Configuration Functions - Hardcoded Configuration
+// GitHub Configuration Functions - Hardcoded Configuration (except token)
 const GITHUB_CONFIG = {
     owner: 'senthilamigo', // Set your GitHub username here
     repo: 'zone5-shop-web', // Set your repository name here
     path: 'dresses.json',
     branch: 'main',
-    token: 'process.env.PAT_TOKEN_KEY' // Set your GitHub Personal Access Token here
+    token: '' // Token is stored in localStorage and can be configured in admin page
 };
 
 function getGitHubConfig() {
-    console.log("token is ${config.token} ");
-    return GITHUB_CONFIG;
+    return {
+        owner: GITHUB_CONFIG.owner,
+        repo: GITHUB_CONFIG.repo,
+        path: GITHUB_CONFIG.path,
+        branch: GITHUB_CONFIG.branch,
+        token: localStorage.getItem('githubToken') || GITHUB_CONFIG.token
+    };
 }
 
 function setGitHubConfig(config) {
-    // Configuration is now hardcoded, this function is kept for backward compatibility
-    // but does nothing
-    console.warn('setGitHubConfig() called but configuration is hardcoded. Update GITHUB_CONFIG constant in script.js to change configuration.');
+    // Only save token to localStorage, other values are hardcoded
+    if (config.token) {
+        localStorage.setItem('githubToken', config.token);
+    }
 }
 
 // Load file from GitHub repository
