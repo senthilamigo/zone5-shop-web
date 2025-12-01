@@ -398,6 +398,18 @@
       ],
       "price": 800,
       "status": "Available"
+    },
+    {
+      "id": "minfrzwls4kjovjkl4",
+      "name": "test3",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1764610911383.png",
+      "description": "good",
+      "category": "formal",
+      "tags": [
+        "formal"
+      ],
+      "price": 5000,
+      "status": "Available"
     }
   ]
 }
