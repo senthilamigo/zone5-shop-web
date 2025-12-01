@@ -448,18 +448,39 @@ function saveGitHubToken() {
 
 // Test GitHub connection
 async function testGitHubConnection() {
+    // Get token from input field first (in case user entered but didn't save)
+    const tokenInput = document.getElementById('githubToken');
+    const tokenFromInput = tokenInput ? tokenInput.value.trim() : '';
+    
+    // Get config (which reads from localStorage)
     const config = getGitHubConfig();
     
-    if (!config.owner || !config.repo || !config.token) {
-        alert('Please save GitHub token first.');
+    // Use token from input if available, otherwise use from config
+    const token = tokenFromInput || config.token;
+    
+    if (!config.owner || !config.repo) {
+        alert('GitHub repository configuration is incomplete. Please check script.js.');
         return;
+    }
+    
+    if (!token) {
+        alert('Please enter and save a GitHub Personal Access Token first.');
+        return;
+    }
+    
+    // Show loading state
+    const testBtn = document.querySelector('button[onclick*="testGitHubConnection"]');
+    const originalText = testBtn ? testBtn.textContent : '';
+    if (testBtn) {
+        testBtn.disabled = true;
+        testBtn.textContent = 'Testing...';
     }
     
     try {
         const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.branch}`;
         const response = await fetch(url, {
             headers: {
-                'Authorization': `token ${config.token}`,
+                'Authorization': `token ${token}`,
                 'Accept': 'application/vnd.github.v3+json'
             }
         });
@@ -468,12 +489,22 @@ async function testGitHubConnection() {
             alert('✓ Connection successful! Repository and file are accessible.');
         } else if (response.status === 404) {
             alert('⚠ Connection successful, but file not found. It will be created on first save.');
+        } else if (response.status === 401 || response.status === 403) {
+            const errorData = await response.json().catch(() => ({}));
+            alert('✗ Authentication failed. Please check your Personal Access Token. Make sure it has "repo" permissions.');
         } else {
             const errorData = await response.json().catch(() => ({}));
-            alert('✗ Connection failed: ' + (errorData.message || response.statusText));
+            alert('✗ Connection failed: ' + (errorData.message || response.statusText) + ` (Status: ${response.status})`);
         }
     } catch (error) {
+        console.error('GitHub connection test error:', error);
         alert('✗ Connection failed: ' + error.message);
+    } finally {
+        // Restore button state
+        if (testBtn) {
+            testBtn.disabled = false;
+            testBtn.textContent = originalText;
+        }
     }
 }
 
