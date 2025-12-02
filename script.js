@@ -66,8 +66,14 @@ async function loadFileFromGitHub() {
     
     const data = await response.json();
     
-    // Decode base64 content
-    const content = atob(data.content.replace(/\s/g, ''));
+    // Decode base64 content (Unicode-safe)
+    const base64Content = data.content.replace(/\s/g, '');
+    const binaryString = atob(base64Content);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+    }
+    const content = new TextDecoder('utf-8').decode(bytes);
     return JSON.parse(content);
 }
 
@@ -99,8 +105,14 @@ async function saveFileToGitHub(jsonData, commitMessage = 'Update dresses.json')
         console.log('File does not exist, will create new file');
     }
     
-    // Encode content to base64
-    const content = btoa(JSON.stringify(jsonData, null, 2));
+    // Encode content to base64 (Unicode-safe)
+    const jsonString = JSON.stringify(jsonData, null, 2);
+    const bytes = new TextEncoder('utf-8').encode(jsonString);
+    let binaryString = '';
+    for (let i = 0; i < bytes.length; i++) {
+        binaryString += String.fromCharCode(bytes[i]);
+    }
+    const content = btoa(binaryString);
     
     const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}`;
     
