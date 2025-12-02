@@ -347,6 +347,7 @@ main {
 .product-card-description {
     font-size: 13px;
     color: var(--color-text-secondary);
+    white-space: pre-line;
     margin-bottom: var(--spacing-sm);
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -947,6 +948,7 @@ main {
 .detail-description-text {
     font-size: 16px;
     line-height: 1.6;
+    white-space: pre-line;
     color: var(--color-text-primary);
     margin: 0;
 }
