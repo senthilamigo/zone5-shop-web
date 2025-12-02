@@ -23,6 +23,14 @@ async function loadDressDetails() {
     renderDressDetails(dress);
 }
 
+// Helper function to escape HTML and preserve newlines
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 // Render dress details
 function renderDressDetails(dress) {
     const detailsContainer = document.getElementById('dressDetails');
@@ -37,30 +45,30 @@ function renderDressDetails(dress) {
     detailsContainer.innerHTML = `
         <div class="dress-details-content">
             <div class="dress-details-image">
-                <img src="${dress.image}" alt="${dress.name}" onerror="this.src='https://via.placeholder.com/500x700?text=Dress'">
+                <img src="${escapeHtml(dress.image)}" alt="${escapeHtml(dress.name)}" onerror="this.src='https://via.placeholder.com/500x700?text=Dress'">
             </div>
             <div class="dress-details-info">
-                <h1 class="dress-details-name">${dress.name}</h1>
+                <h1 class="dress-details-name">${escapeHtml(dress.name)}</h1>
                 <div class="dress-details-price">₹${dress.price.toFixed(2)}</div>
                 <div class="dress-details-status">
                     <span class="detail-label">Status:</span>
-                    <span class="detail-value ${statusClass}">${statusText}</span>
+                    <span class="detail-value ${statusClass}">${escapeHtml(statusText)}</span>
                 </div>
                 <div class="dress-details-category">
                     <span class="detail-label">Category:</span>
-                    <span class="detail-value">${dress.category}</span>
+                    <span class="detail-value">${escapeHtml(dress.category)}</span>
                 </div>
                 <div class="dress-details-tags">
                     <span class="detail-label">Tags:</span>
                     <div class="tags-list">
                         ${dress.tags && dress.tags.length > 0 
-                            ? dress.tags.map(tag => `<span class="tag-badge">${tag}</span>`).join('') 
+                            ? dress.tags.map(tag => `<span class="tag-badge">${escapeHtml(tag)}</span>`).join('') 
                             : '<span class="no-tags">No tags</span>'}
                     </div>
                 </div>
                 <div class="dress-details-description">
                     <span class="detail-label">Description:</span>
-                    <p class="detail-description-text">${dress.description || 'No description available.'}</p>
+                    <p class="detail-description-text">${escapeHtml(dress.description || 'No description available.')}</p>
                 </div>
                 <div class="dress-details-actions">
                     <button class="btn btn-primary btn-add-to-cart" onclick="handleAddToCart('${dress.id}')" ${isSoldOut ? 'disabled' : ''}>

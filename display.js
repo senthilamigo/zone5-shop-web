@@ -153,6 +153,14 @@ function renderProductGrid(dresses) {
 }
 
 // Create product card for display page
+// Helper function to escape HTML and preserve newlines
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 function createProductCard(dress) {
     const card = document.createElement('div');
     card.className = 'product-card';
@@ -163,13 +171,13 @@ function createProductCard(dress) {
     
     card.innerHTML = `
         <div class="product-card-image">
-            <img src="${dress.image}" alt="${dress.name}" onerror="this.src='https://via.placeholder.com/300x400?text=Dress'">
-            ${dress.tags && dress.tags.length > 0 ? `<div class="product-card-badge">${dress.tags[0]}</div>` : ''}
+            <img src="${escapeHtml(dress.image)}" alt="${escapeHtml(dress.name)}" onerror="this.src='https://via.placeholder.com/300x400?text=Dress'">
+            ${dress.tags && dress.tags.length > 0 ? `<div class="product-card-badge">${escapeHtml(dress.tags[0])}</div>` : ''}
             ${statusBadge}
         </div>
         <div class="product-card-content">
-            <h3 class="product-card-name">${dress.name}</h3>
-            <p class="product-card-description">${dress.description || ''}</p>
+            <h3 class="product-card-name">${escapeHtml(dress.name)}</h3>
+            <p class="product-card-description">${escapeHtml(dress.description || '')}</p>
             <div class="product-card-price">₹${dress.price.toFixed(2)}</div>
             <div class="product-card-actions">
                 <a href="dress-details.html?id=${dress.id}" class="btn btn-primary" style="width: 100%; display: block; text-align: center; margin-bottom: 8px;">View Details</a>
