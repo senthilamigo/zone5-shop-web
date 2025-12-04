@@ -4,6 +4,7 @@
 const EMAILJS_PUBLIC_KEY = window.EMAILJS_PUBLIC_KEY || 'm8VJiIrcKuIJV2Xfr';
 const EMAILJS_SERVICE_ID = window.EMAILJS_SERVICE_ID || 'service_jqrtm93';
 const EMAILJS_TEMPLATE_ID = window.EMAILJS_TEMPLATE_ID || 'template_h8t5u9t';
+const EMAILJS_CUSTOMER_TEMPLATE_ID = window.EMAILJS_CUSTOMER_TEMPLATE_ID || 'template_m8d8aeu'; // Customer confirmation email template
 
 // Load cart and display items
 function loadCart() {
@@ -174,7 +175,14 @@ async function handleCheckout(event) {
     const emailSent = await sendOrderEmail(adminEmail, customerName, customerEmail, orderItemsText, total, orderItemsHTML);
     
     if (emailSent) {
-        alert('Order submitted successfully! The admin has been notified.');
+        // Send confirmation email to customer
+        const customerEmailSent = await sendCustomerConfirmationEmail(customerName, customerEmail, orderItemsText, total, orderItemsHTML);
+        
+        if (customerEmailSent) {
+            alert('Order submitted successfully! The admin has been notified and a confirmation email has been sent to you.');
+        } else {
+            alert('Order submitted successfully! The admin has been notified. (Note: Confirmation email could not be sent)');
+        }
     } else {
         // Fallback to mailto
         const subject = encodeURIComponent(`New Order from ${customerName}`);
@@ -226,6 +234,32 @@ async function sendOrderEmail(adminEmail, customerName, customerEmail, orderItem
     } catch (error) {
         console.error('EmailJS error:', error);
         alert('Unable to send email using EmailJS. Your email client will open as a fallback.');
+        return false;
+    }
+}
+
+// Send confirmation email to customer
+async function sendCustomerConfirmationEmail(customerName, customerEmail, orderItemsText, total, orderItemsHTML) {
+    if (!isEmailJsConfigured()) {
+        console.warn('EmailJS is not configured. Cannot send customer confirmation email.');
+        return false;
+    }
+    
+    try {
+        const templateParams = {
+            to_email: customerEmail,
+            customer_name: customerName,
+            customer_email: customerEmail,
+            order_items: orderItemsHTML,
+            order_items_text: orderItemsText,
+            total_amount: `₹${total.toFixed(2)}`,
+            order_date: new Date().toLocaleString()
+        };
+        
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CUSTOMER_TEMPLATE_ID, templateParams);
+        return true;
+    } catch (error) {
+        console.error('EmailJS error sending customer confirmation:', error);
         return false;
     }
 }
