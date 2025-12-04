@@ -134,6 +134,142 @@ function createInventoryItem(dress) {
 }
 
 // Setup form handler
+// Initialize image upload slots
+function initializeImageUploads() {
+    const container = document.getElementById('imageUploadsContainer');
+    if (!container) return;
+    
+    // Always start with at least one image slot (mandatory)
+    container.innerHTML = '';
+    addImageSlot(0, true); // First slot is mandatory
+    
+    // Setup add image button
+    const addBtn = document.getElementById('addImageSlotBtn');
+    if (addBtn) {
+        addBtn.addEventListener('click', function() {
+            const slots = container.querySelectorAll('.image-upload-slot');
+            if (slots.length < 5) {
+                addImageSlot(slots.length, false);
+            } else {
+                alert('Maximum 5 images allowed.');
+            }
+        });
+    }
+}
+
+// Add an image upload slot
+function addImageSlot(index, isMandatory) {
+    const container = document.getElementById('imageUploadsContainer');
+    if (!container) return;
+    
+    const slot = document.createElement('div');
+    slot.className = 'image-upload-slot';
+    slot.dataset.index = index;
+    
+    const slotId = `imageSlot_${index}`;
+    const inputId = `dressImage_${index}`;
+    const previewId = `previewImg_${index}`;
+    const removeBtnId = `removeBtn_${index}`;
+    
+    slot.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: #f9f9f9;">
+            <div style="flex: 1;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 12px;">
+                    Image ${index + 1} ${isMandatory ? '*' : '(Optional)'}
+                </label>
+                <input type="file" id="${inputId}" accept="image/*" style="display: none;" data-index="${index}">
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('${inputId}').click()" style="width: 100%; font-size: 12px; padding: 8px;">
+                    Choose Image
+                </button>
+            </div>
+            <div id="${previewId}" style="display: none; width: 80px; height: 80px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; flex-shrink: 0;">
+                <img src="" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            ${!isMandatory ? `<button type="button" id="${removeBtnId}" class="btn btn-secondary" onclick="removeImageSlot(${index})" style="padding: 8px 12px; font-size: 12px;">Remove</button>` : ''}
+        </div>
+    `;
+    
+    container.appendChild(slot);
+    
+    // Setup file input change handler
+    const fileInput = document.getElementById(inputId);
+    if (fileInput) {
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById(previewId);
+                    if (preview) {
+                        const img = preview.querySelector('img');
+                        if (img) img.src = e.target.result;
+                        preview.style.display = 'block';
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+    
+    updateAddButtonVisibility();
+}
+
+// Remove an image upload slot
+function removeImageSlot(index) {
+    const container = document.getElementById('imageUploadsContainer');
+    if (!container) return;
+    
+    const slot = container.querySelector(`[data-index="${index}"]`);
+    if (slot) {
+        slot.remove();
+        // Reindex remaining slots
+        reindexImageSlots();
+    }
+}
+
+// Reindex image slots after removal
+function reindexImageSlots() {
+    const container = document.getElementById('imageUploadsContainer');
+    if (!container) return;
+    
+    const slots = container.querySelectorAll('.image-upload-slot');
+    slots.forEach((slot, newIndex) => {
+        slot.dataset.index = newIndex;
+        const input = slot.querySelector('input[type="file"]');
+        const label = slot.querySelector('label');
+        const removeBtn = slot.querySelector('button[onclick*="removeImageSlot"]');
+        
+        if (input) {
+            input.dataset.index = newIndex;
+            input.id = `dressImage_${newIndex}`;
+            input.setAttribute('onclick', `document.getElementById('dressImage_${newIndex}').click()`);
+        }
+        if (label) {
+            label.innerHTML = `Image ${newIndex + 1} ${newIndex === 0 ? '*' : '(Optional)'}`;
+        }
+        if (removeBtn && newIndex > 0) {
+            removeBtn.setAttribute('onclick', `removeImageSlot(${newIndex})`);
+            removeBtn.id = `removeBtn_${newIndex}`;
+        }
+    });
+    
+    updateAddButtonVisibility();
+}
+
+// Update add button visibility based on current slot count
+function updateAddButtonVisibility() {
+    const container = document.getElementById('imageUploadsContainer');
+    const addBtn = document.getElementById('addImageSlotBtn');
+    if (!container || !addBtn) return;
+    
+    const slots = container.querySelectorAll('.image-upload-slot');
+    if (slots.length >= 5) {
+        addBtn.style.display = 'none';
+    } else {
+        addBtn.style.display = 'block';
+    }
+}
+
 function setupForm() {
     const form = document.getElementById('dressForm');
     if (!form) return;
@@ -150,40 +286,13 @@ function setupForm() {
         });
     }
     
-    // Setup image preview
-    const imageInput = document.getElementById('dressImage');
-    if (imageInput) {
-        imageInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                // Show preview
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const previewImg = document.getElementById('previewImg');
-                    const imagePreview = document.getElementById('imagePreview');
-                    const imageFileName = document.getElementById('imageFileName');
-                    const uploadBtn = document.getElementById('uploadImageBtn');
-                    
-                    if (previewImg) previewImg.src = e.target.result;
-                    if (imagePreview) imagePreview.style.display = 'block';
-                    if (imageFileName) imageFileName.textContent = file.name;
-                    if (uploadBtn) uploadBtn.textContent = 'Change Image';
-                };
-                reader.readAsDataURL(file);
-                
-                // Clear the hidden URL field
-                const imageUrlInput = document.getElementById('dressImageUrl');
-                if (imageUrlInput) imageUrlInput.value = '';
-            }
-        });
-    }
+    // Initialize image uploads
+    initializeImageUploads();
 }
 
 // Handle form submission
 async function handleFormSubmit() {
     const name = document.getElementById('dressName').value.trim();
-    const imageInput = document.getElementById('dressImage');
-    const imageUrlInput = document.getElementById('dressImageUrl');
     const description = document.getElementById('dressDescription').value.trim();
     const category = document.getElementById('dressCategory').value;
     const tagsInput = document.getElementById('dressTags').value.trim();
@@ -196,12 +305,31 @@ async function handleFormSubmit() {
         return;
     }
     
-    // Check if image is provided (either file upload or existing URL)
-    let imageUrl = imageUrlInput ? imageUrlInput.value.trim() : '';
-    const imageFile = imageInput && imageInput.files && imageInput.files.length > 0 ? imageInput.files[0] : null;
+    // Get all image inputs and existing URLs
+    const container = document.getElementById('imageUploadsContainer');
+    const imageSlots = container ? container.querySelectorAll('.image-upload-slot') : [];
+    const imageFiles = [];
+    const existingImageUrls = [];
     
-    if (!imageFile && !imageUrl) {
-        alert('Please upload an image or provide an image URL.');
+    // Collect image files and existing URLs
+    imageSlots.forEach((slot, index) => {
+        const input = slot.querySelector('input[type="file"]');
+        const preview = slot.querySelector('div[id^="previewImg_"]');
+        
+        if (input && input.files && input.files.length > 0) {
+            imageFiles.push({ index: index, file: input.files[0] });
+        } else if (preview && preview.style.display !== 'none') {
+            // Check if this is an existing image URL (from edit mode)
+            const img = preview.querySelector('img');
+            if (img && img.src && !img.src.startsWith('data:')) {
+                existingImageUrls.push({ index: index, url: img.src });
+            }
+        }
+    });
+    
+    // Validate that at least the first image is provided
+    if (imageFiles.length === 0 && existingImageUrls.length === 0) {
+        alert('Please upload at least one image (first image is mandatory).');
         return;
     }
     
@@ -213,47 +341,68 @@ async function handleFormSubmit() {
         return;
     }
     
-    // Upload image if a new file is selected
-    if (imageFile) {
-        try {
-            const submitBtn = document.getElementById('submitBtn');
+    // Upload images if files are selected
+    const imageUrls = [];
+    const submitBtn = document.getElementById('submitBtn');
+    
+    try {
+        if (imageFiles.length > 0) {
             if (submitBtn) {
                 submitBtn.disabled = true;
-                submitBtn.textContent = 'Uploading Image...';
+                submitBtn.textContent = `Uploading ${imageFiles.length} image(s)...`;
             }
             
-            imageUrl = await uploadImageToGitHub(imageFile);
-            
-            // Save the URL to hidden field
-            if (imageUrlInput) imageUrlInput.value = imageUrl;
-            
-            if (submitBtn) {
-                submitBtn.textContent = editingDressId ? 'Updating...' : 'Adding...';
+            // Upload all images
+            for (let i = 0; i < imageFiles.length; i++) {
+                const { index, file } = imageFiles[i];
+                try {
+                    const uploadedUrl = await uploadImageToGitHub(file);
+                    imageUrls[index] = uploadedUrl;
+                } catch (error) {
+                    console.error(`Error uploading image ${index + 1}:`, error);
+                    throw new Error(`Failed to upload image ${index + 1}: ${error.message}`);
+                }
             }
-        } catch (error) {
-            console.error('Error uploading image:', error);
-            alert('Failed to upload image: ' + error.message);
-            const submitBtn = document.getElementById('submitBtn');
+        }
+        
+        // Combine uploaded URLs with existing URLs
+        existingImageUrls.forEach(({ index, url }) => {
+            if (!imageUrls[index]) {
+                imageUrls[index] = url;
+            }
+        });
+        
+        // Filter out undefined entries and ensure array is sequential
+        const finalImageUrls = imageUrls.filter(url => url !== undefined && url !== null);
+        
+        if (finalImageUrls.length === 0) {
+            alert('No valid images found. Please upload at least one image.');
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = editingDressId ? 'Update Dress' : 'Add Dress';
             }
             return;
         }
-    }
-    
-    const dress = {
-        id: editingDressId || generateId(),
-        name: name,
-        image: imageUrl,
-        description: description,
-        category: category,
-        tags: tags,
-        price: price,
-        status: status
-    };
-    
-    try {
+        
+        if (submitBtn) {
+            submitBtn.textContent = editingDressId ? 'Updating...' : 'Adding...';
+        }
+        
+        // Get primary image (first image) for backward compatibility
+        const primaryImage = finalImageUrls[0];
+        
+        const dress = {
+            id: editingDressId || generateId(),
+            name: name,
+            image: primaryImage, // For backward compatibility
+            images: finalImageUrls, // New format with all images
+            description: description,
+            category: category,
+            tags: tags,
+            price: price,
+            status: status
+        };
+        
         const config = getGitHubConfig();
         const saveToGitHub = config.owner && config.repo && config.token;
         
@@ -266,9 +415,13 @@ async function handleFormSubmit() {
         }
     } catch (error) {
         console.error('Error saving dress:', error);
-        alert('Dress saved locally, but failed to save to GitHub: ' + error.message);
+        alert('Error: ' + error.message);
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = editingDressId ? 'Update Dress' : 'Add Dress';
+        }
+        return;
     } finally {
-        const submitBtn = document.getElementById('submitBtn');
         if (submitBtn) {
             submitBtn.disabled = false;
             submitBtn.textContent = editingDressId ? 'Update Dress' : 'Add Dress';
@@ -298,26 +451,37 @@ function editDress(id) {
     document.getElementById('dressPrice').value = dress.price;
     document.getElementById('dressStatus').value = dress.status || 'Available';
     
-    // Handle image - show current image and set URL
-    const imageInput = document.getElementById('dressImage');
-    const imageUrlInput = document.getElementById('dressImageUrl');
-    const previewImg = document.getElementById('previewImg');
-    const imagePreview = document.getElementById('imagePreview');
-    const imageFileName = document.getElementById('imageFileName');
-    const uploadBtn = document.getElementById('uploadImageBtn');
+    // Get all images for the dress (support both old and new format)
+    const images = getDressImagesForEdit(dress);
     
-    if (imageUrlInput) imageUrlInput.value = dress.image || '';
-    if (imageInput) imageInput.value = ''; // Clear file input
-    
-    // Show current image as preview
-    if (dress.image && previewImg && imagePreview) {
-        previewImg.src = dress.image;
-        imagePreview.style.display = 'block';
-        if (imageFileName) imageFileName.textContent = 'Current image (click button to change)';
-        if (uploadBtn) uploadBtn.textContent = 'Change Image';
-    } else {
-        if (imagePreview) imagePreview.style.display = 'none';
-        if (uploadBtn) uploadBtn.textContent = 'Choose Image to Upload';
+    // Clear and rebuild image upload slots
+    const container = document.getElementById('imageUploadsContainer');
+    if (container) {
+        container.innerHTML = '';
+        
+        // Create slots for each existing image
+        images.forEach((imageUrl, index) => {
+            const isMandatory = index === 0;
+            addImageSlot(index, isMandatory);
+            
+            // Set the preview image
+            setTimeout(() => {
+                const previewId = `previewImg_${index}`;
+                const preview = document.getElementById(previewId);
+                if (preview) {
+                    const img = preview.querySelector('img');
+                    if (img) {
+                        img.src = imageUrl;
+                        preview.style.display = 'block';
+                    }
+                }
+            }, 100);
+        });
+        
+        // If no images, at least show one mandatory slot
+        if (images.length === 0) {
+            addImageSlot(0, true);
+        }
     }
     
     // Update form title and button
@@ -341,6 +505,20 @@ function editDress(id) {
     if (formSection) {
         formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+}
+
+// Get all images for a dress (for edit mode)
+function getDressImagesForEdit(dress) {
+    // New format: images array
+    if (dress.images && Array.isArray(dress.images) && dress.images.length > 0) {
+        return dress.images;
+    }
+    // Old format: single image field (for backward compatibility)
+    if (dress.image) {
+        return [dress.image];
+    }
+    // No images
+    return [];
 }
 
 // Delete dress
@@ -387,20 +565,8 @@ function resetForm() {
     
     document.getElementById('dressId').value = '';
     
-    // Reset image preview
-    const imageInput = document.getElementById('dressImage');
-    const imageUrlInput = document.getElementById('dressImageUrl');
-    const previewImg = document.getElementById('previewImg');
-    const imagePreview = document.getElementById('imagePreview');
-    const imageFileName = document.getElementById('imageFileName');
-    const uploadBtn = document.getElementById('uploadImageBtn');
-    
-    if (imageInput) imageInput.value = '';
-    if (imageUrlInput) imageUrlInput.value = '';
-    if (previewImg) previewImg.src = '';
-    if (imagePreview) imagePreview.style.display = 'none';
-    if (imageFileName) imageFileName.textContent = '';
-    if (uploadBtn) uploadBtn.textContent = 'Choose Image to Upload';
+    // Reset image uploads - reinitialize with one mandatory slot
+    initializeImageUploads();
     
     const formTitle = document.getElementById('formTitle');
     if (formTitle) {
@@ -578,4 +744,5 @@ window.deleteDressItem = deleteDressItem;
 window.saveAdminEmail = saveAdminEmail;
 window.saveGitHubToken = saveGitHubToken;
 window.testGitHubConnection = testGitHubConnection;
+window.removeImageSlot = removeImageSlot;
 
