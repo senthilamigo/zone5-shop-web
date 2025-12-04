@@ -49,17 +49,15 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="dressImage">Image *</label>
-                            <input type="file" id="dressImage" accept="image/*" style="display: none;">
-                            <button type="button" class="btn btn-secondary" id="uploadImageBtn" onclick="document.getElementById('dressImage').click()" style="width: 100%; margin-bottom: 10px;">
-                                Choose Image to Upload
-                            </button>
-                            <div id="imagePreview" style="margin-top: 10px; display: none;">
-                                <img id="previewImg" src="" alt="Preview" style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px;">
-                                <p id="imageFileName" style="margin-top: 5px; color: #666; font-size: 12px;"></p>
+                            <label>Images * (Up to 5 images, first is mandatory)</label>
+                            <div id="imageUploadsContainer">
+                                <!-- Image upload slots will be dynamically added here -->
                             </div>
-                            <input type="hidden" id="dressImageUrl">
-                            <small style="display: block; margin-top: 5px; color: #666;">Image will be uploaded to GitHub repository</small>
+                            <button type="button" class="btn btn-secondary" id="addImageSlotBtn" style="width: 100%; margin-top: 10px;">
+                                + Add Another Image (Optional)
+                            </button>
+                            <input type="hidden" id="dressImageUrls" value="[]">
+                            <small style="display: block; margin-top: 5px; color: #666;">Images will be uploaded to GitHub repository. First image is required.</small>
                         </div>
 
                         <div class="form-group">

@@ -563,6 +563,55 @@ main {
     color: var(--color-text-secondary);
 }
 
+/* Image Upload Slots */
+#imageUploadsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.image-upload-slot {
+    margin-bottom: var(--spacing-sm);
+}
+
+.image-upload-slot > div {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-neutral-medium-gray);
+    border-radius: var(--border-radius);
+    background-color: var(--color-white);
+    transition: border-color 0.3s ease;
+}
+
+.image-upload-slot > div:hover {
+    border-color: var(--color-primary);
+}
+
+.image-upload-slot label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: none;
+}
+
+.image-upload-slot button {
+    white-space: nowrap;
+}
+
+.image-upload-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+#addImageSlotBtn {
+    margin-top: var(--spacing-sm);
+}
+
 .form-actions {
     display: flex;
     gap: var(--spacing-sm);
