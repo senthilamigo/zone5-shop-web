@@ -340,6 +340,25 @@ function getDressById(id) {
     return dresses.find(d => d.id === id);
 }
 
+// Get primary image for a dress (supports both old and new format)
+// Returns the first image from images array, or falls back to image field
+function getDressPrimaryImage(dress) {
+    if (!dress) return 'https://via.placeholder.com/300x400?text=Dress';
+    
+    // New format: images array (first is mandatory)
+    if (dress.images && Array.isArray(dress.images) && dress.images.length > 0) {
+        return dress.images[0];
+    }
+    
+    // Old format: single image field (for backward compatibility)
+    if (dress.image) {
+        return dress.image;
+    }
+    
+    // Fallback
+    return 'https://via.placeholder.com/300x400?text=Dress';
+}
+
 // Get cart from LocalStorage
 function getCart() {
     const cart = localStorage.getItem('cart');
