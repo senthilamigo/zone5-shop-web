@@ -5,6 +5,12 @@
       "id": "dress-1",
       "name": "Elegant Silk Saree - Festive",
       "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop",
+      "images": [
+        "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?w=400&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1594633313593-bab3825d0caf?w=400&h=600&fit=crop"
+      ],
       "description": "Beautiful traditional silk saree perfect for festive occasions",
       "category": "silk sarees",
       "tags": [
