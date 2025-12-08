@@ -440,6 +440,22 @@
       ],
       "price": 6000,
       "status": "Available"
+    },
+    {
+      "id": "mixheqjynbbmsqb1o5p",
+      "name": "Soft Mixed Cotton Suit – Grey Elegance",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1765218312851.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1765218312851.jpeg",
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1765218314969.jpg"
+      ],
+      "description": "🌿 Soft Mixed Cotton Suit – Grey Elegance 🌿\n\n✨ Fabric\n• 80% soft cotton, 20% blended fibre\n• Lightweight, breathable & skin-friendly\n\n✨ Design & Pattern\n• Grey base with peach–ivory–teal floral motifs\n• Ajrakh-inspired borders & geometric detailing\n• Coordinated printed bottom for a complete set\n• Soft ivory mixed-cotton dupatta for a classy finish\n\n✨ Set Includes\n• Top: Printed soft-mixed cotton\n• Bottom: Matching printed pattern\n• Dupatta: Solid ivory mixed cotton\n\n✨ Look & Feel\n• Elegant • Office-friendly • Neat & rich ethnic styling\n\n🧼 Care\n• Hand wash recommended\n• Mild detergent only\n• Dry in shade\n• Wash once before stitching",
+      "category": "Readymade Salwar Suits",
+      "tags": [
+        "office"
+      ],
+      "price": 1600,
+      "status": "Available"
     }
   ]
 }
