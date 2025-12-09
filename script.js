@@ -417,16 +417,28 @@ function exportDressesToExcel(dresses) {
     }
     
     // Prepare data for Excel
-    const excelData = dresses.map(dress => ({
-        'ID': dress.id || '',
-        'Name': dress.name || '',
-        'Image URL': dress.image || '',
-        'Description': dress.description || '',
-        'Category': dress.category || '',
-        'Tags': dress.tags ? dress.tags.join(', ') : '',
-        'Price (₹)': dress.price || 0,
-        'Status': dress.status || 'Available'
-    }));
+    const excelData = dresses.map(dress => {
+        // Get all images - support both new format (images array) and old format (image field)
+        let imageUrls = '';
+        if (dress.images && Array.isArray(dress.images) && dress.images.length > 0) {
+            // New format: join all images with semicolon separator
+            imageUrls = dress.images.join('; ');
+        } else if (dress.image) {
+            // Old format: single image field (for backward compatibility)
+            imageUrls = dress.image;
+        }
+        
+        return {
+            'ID': dress.id || '',
+            'Name': dress.name || '',
+            'Image URLs': imageUrls,
+            'Description': dress.description || '',
+            'Category': dress.category || '',
+            'Tags': dress.tags ? dress.tags.join(', ') : '',
+            'Price (₹)': dress.price || 0,
+            'Status': dress.status || 'Available'
+        };
+    });
     
     // Create workbook and worksheet
     const wb = XLSX.utils.book_new();
@@ -436,7 +448,7 @@ function exportDressesToExcel(dresses) {
     const colWidths = [
         { wch: 15 }, // ID
         { wch: 30 }, // Name
-        { wch: 50 }, // Image URL
+        { wch: 80 }, // Image URLs (increased width for multiple URLs)
         { wch: 40 }, // Description
         { wch: 20 }, // Category
         { wch: 30 }, // Tags
@@ -557,10 +569,22 @@ async function importFromExcel() {
                             }
                         }
                         
+                        // Parse images - support both new format (Image URLs) and old format (Image URL)
+                        let imageUrls = row['Image URLs'] || row['Image URL'] || '';
+                        let images = [];
+                        if (imageUrls) {
+                            // Split by semicolon to get multiple images
+                            images = imageUrls.split(';').map(url => url.trim()).filter(url => url.length > 0);
+                        }
+                        
+                        // Ensure at least one image (use first image as primary)
+                        const primaryImage = images.length > 0 ? images[0] : '';
+                        
                         return {
                             id: row['ID'] || `dress-${Date.now()}-${index}`,
                             name: row['Name'] || '',
-                            image: row['Image URL'] || '',
+                            image: primaryImage, // Primary image for backward compatibility
+                            images: images.length > 0 ? images : [primaryImage].filter(img => img), // Images array
                             description: row['Description'] || '',
                             category: row['Category'] || '',
                             tags: tags,
