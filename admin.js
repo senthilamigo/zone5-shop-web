@@ -168,24 +168,34 @@ function addImageSlot(index, isMandatory) {
     
     const slotId = `imageSlot_${index}`;
     const inputId = `dressImage_${index}`;
+    const urlInputId = `dressImageUrl_${index}`;
     const previewId = `previewImg_${index}`;
     const removeBtnId = `removeBtn_${index}`;
     
     slot.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: #f9f9f9;">
-            <div style="flex: 1;">
-                <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 12px;">
-                    Image ${index + 1} ${isMandatory ? '*' : '(Optional)'}
-                </label>
-                <input type="file" id="${inputId}" accept="image/*" style="display: none;" data-index="${index}">
-                <button type="button" class="btn btn-secondary" onclick="document.getElementById('${inputId}').click()" style="width: 100%; font-size: 12px; padding: 8px;">
-                    Choose Image
-                </button>
+        <div style="margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: #f9f9f9;">
+            <label style="display: block; margin-bottom: 8px; font-weight: bold; font-size: 12px;">
+                Image ${index + 1} ${isMandatory ? '*' : '(Optional)'}
+            </label>
+            <div style="display: flex; gap: 10px; margin-bottom: 8px;">
+                <div style="flex: 1;">
+                    <label style="display: block; margin-bottom: 3px; font-size: 11px; color: #666;">Upload Image</label>
+                    <input type="file" id="${inputId}" accept="image/*" style="display: none;" data-index="${index}">
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('${inputId}').click()" style="width: 100%; font-size: 12px; padding: 8px;">
+                        Choose Image
+                    </button>
+                </div>
+                <div style="flex: 1;">
+                    <label style="display: block; margin-bottom: 3px; font-size: 11px; color: #666;">OR Enter Image URL</label>
+                    <input type="url" id="${urlInputId}" placeholder="https://example.com/image.jpg" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;" data-index="${index}">
+                </div>
             </div>
-            <div id="${previewId}" style="display: none; width: 80px; height: 80px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; flex-shrink: 0;">
-                <img src="" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div id="${previewId}" style="display: none; width: 80px; height: 80px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; flex-shrink: 0;">
+                    <img src="" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                ${!isMandatory ? `<button type="button" id="${removeBtnId}" class="btn btn-secondary" onclick="removeImageSlot(${index})" style="padding: 8px 12px; font-size: 12px; margin-left: auto;">Remove</button>` : ''}
             </div>
-            ${!isMandatory ? `<button type="button" id="${removeBtnId}" class="btn btn-secondary" onclick="removeImageSlot(${index})" style="padding: 8px 12px; font-size: 12px;">Remove</button>` : ''}
         </div>
     `;
     
@@ -197,6 +207,10 @@ function addImageSlot(index, isMandatory) {
         fileInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
+                // Clear URL input when file is selected
+                const urlInput = document.getElementById(urlInputId);
+                if (urlInput) urlInput.value = '';
+                
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const preview = document.getElementById(previewId);
@@ -208,6 +222,45 @@ function addImageSlot(index, isMandatory) {
                 };
                 reader.readAsDataURL(file);
             }
+        });
+    }
+    
+    // Setup URL input change handler
+    const urlInput = document.getElementById(urlInputId);
+    if (urlInput) {
+        urlInput.addEventListener('input', function(e) {
+            const url = e.target.value.trim();
+            if (url) {
+                // Clear file input when URL is entered
+                if (fileInput) fileInput.value = '';
+                
+                // Validate URL and show preview
+                const preview = document.getElementById(previewId);
+                if (preview) {
+                    const img = preview.querySelector('img');
+                    if (img) {
+                        img.src = url;
+                        img.onerror = function() {
+                            // If image fails to load, still show preview but with error indication
+                            preview.style.display = 'block';
+                        };
+                        img.onload = function() {
+                            preview.style.display = 'block';
+                        };
+                    }
+                }
+            } else {
+                // Hide preview if URL is cleared
+                const preview = document.getElementById(previewId);
+                if (preview) preview.style.display = 'none';
+            }
+        });
+        
+        // Also handle paste and blur events
+        urlInput.addEventListener('paste', function() {
+            setTimeout(() => {
+                urlInput.dispatchEvent(new Event('input'));
+            }, 10);
         });
     }
     
@@ -235,14 +288,28 @@ function reindexImageSlots() {
     const slots = container.querySelectorAll('.image-upload-slot');
     slots.forEach((slot, newIndex) => {
         slot.dataset.index = newIndex;
-        const input = slot.querySelector('input[type="file"]');
+        const fileInput = slot.querySelector('input[type="file"]');
+        const urlInput = slot.querySelector('input[type="url"]');
         const label = slot.querySelector('label');
         const removeBtn = slot.querySelector('button[onclick*="removeImageSlot"]');
+        const previewId = `previewImg_${newIndex}`;
+        const preview = slot.querySelector(`div[id^="previewImg_"]`);
         
-        if (input) {
-            input.dataset.index = newIndex;
-            input.id = `dressImage_${newIndex}`;
-            input.setAttribute('onclick', `document.getElementById('dressImage_${newIndex}').click()`);
+        if (fileInput) {
+            fileInput.dataset.index = newIndex;
+            fileInput.id = `dressImage_${newIndex}`;
+            // Update the button onclick that triggers file input
+            const chooseBtn = slot.querySelector('button[onclick*="getElementById"]');
+            if (chooseBtn) {
+                chooseBtn.setAttribute('onclick', `document.getElementById('dressImage_${newIndex}').click()`);
+            }
+        }
+        if (urlInput) {
+            urlInput.dataset.index = newIndex;
+            urlInput.id = `dressImageUrl_${newIndex}`;
+        }
+        if (preview) {
+            preview.id = previewId;
         }
         if (label) {
             label.innerHTML = `Image ${newIndex + 1} ${newIndex === 0 ? '*' : '(Optional)'}`;
@@ -309,15 +376,29 @@ async function handleFormSubmit() {
     const container = document.getElementById('imageUploadsContainer');
     const imageSlots = container ? container.querySelectorAll('.image-upload-slot') : [];
     const imageFiles = [];
+    const imageUrls = [];
     const existingImageUrls = [];
     
-    // Collect image files and existing URLs
+    // Collect image files, URL inputs, and existing URLs
     imageSlots.forEach((slot, index) => {
-        const input = slot.querySelector('input[type="file"]');
+        const fileInput = slot.querySelector('input[type="file"]');
+        const urlInput = slot.querySelector('input[type="url"]');
         const preview = slot.querySelector('div[id^="previewImg_"]');
         
-        if (input && input.files && input.files.length > 0) {
-            imageFiles.push({ index: index, file: input.files[0] });
+        // Priority: file upload > URL input > existing preview (from edit mode)
+        if (fileInput && fileInput.files && fileInput.files.length > 0) {
+            imageFiles.push({ index: index, file: fileInput.files[0] });
+        } else if (urlInput && urlInput.value.trim()) {
+            // User entered a URL
+            const url = urlInput.value.trim();
+            // Basic URL validation
+            try {
+                new URL(url);
+                imageUrls.push({ index: index, url: url });
+            } catch (e) {
+                alert(`Invalid URL for Image ${index + 1}. Please enter a valid URL.`);
+                throw new Error('Invalid URL');
+            }
         } else if (preview && preview.style.display !== 'none') {
             // Check if this is an existing image URL (from edit mode)
             const img = preview.querySelector('img');
@@ -328,8 +409,8 @@ async function handleFormSubmit() {
     });
     
     // Validate that at least the first image is provided
-    if (imageFiles.length === 0 && existingImageUrls.length === 0) {
-        alert('Please upload at least one image (first image is mandatory).');
+    if (imageFiles.length === 0 && imageUrls.length === 0 && existingImageUrls.length === 0) {
+        alert('Please upload an image or enter an image URL for at least the first image (first image is mandatory).');
         return;
     }
     
@@ -341,8 +422,8 @@ async function handleFormSubmit() {
         return;
     }
     
-    // Upload images if files are selected
-    const imageUrls = [];
+    // Process images: upload files, use provided URLs, or keep existing URLs
+    const finalImageUrlsArray = [];
     const submitBtn = document.getElementById('submitBtn');
     
     try {
@@ -352,12 +433,12 @@ async function handleFormSubmit() {
                 submitBtn.textContent = `Uploading ${imageFiles.length} image(s)...`;
             }
             
-            // Upload all images
+            // Upload all image files
             for (let i = 0; i < imageFiles.length; i++) {
                 const { index, file } = imageFiles[i];
                 try {
                     const uploadedUrl = await uploadImageToGitHub(file);
-                    imageUrls[index] = uploadedUrl;
+                    finalImageUrlsArray[index] = uploadedUrl;
                 } catch (error) {
                     console.error(`Error uploading image ${index + 1}:`, error);
                     throw new Error(`Failed to upload image ${index + 1}: ${error.message}`);
@@ -365,15 +446,22 @@ async function handleFormSubmit() {
             }
         }
         
-        // Combine uploaded URLs with existing URLs
+        // Add URL inputs (these don't need uploading, they're already URLs)
+        imageUrls.forEach(({ index, url }) => {
+            if (!finalImageUrlsArray[index]) {
+                finalImageUrlsArray[index] = url;
+            }
+        });
+        
+        // Add existing URLs (from edit mode)
         existingImageUrls.forEach(({ index, url }) => {
-            if (!imageUrls[index]) {
-                imageUrls[index] = url;
+            if (!finalImageUrlsArray[index]) {
+                finalImageUrlsArray[index] = url;
             }
         });
         
         // Filter out undefined entries and ensure array is sequential
-        const finalImageUrls = imageUrls.filter(url => url !== undefined && url !== null);
+        const finalImageUrls = finalImageUrlsArray.filter(url => url !== undefined && url !== null);
         
         if (finalImageUrls.length === 0) {
             alert('No valid images found. Please upload at least one image.');
@@ -464,10 +552,19 @@ function editDress(id) {
             const isMandatory = index === 0;
             addImageSlot(index, isMandatory);
             
-            // Set the preview image
+            // Set the URL input and preview image
             setTimeout(() => {
+                const urlInputId = `dressImageUrl_${index}`;
+                const urlInput = document.getElementById(urlInputId);
                 const previewId = `previewImg_${index}`;
                 const preview = document.getElementById(previewId);
+                
+                // Populate URL input field
+                if (urlInput) {
+                    urlInput.value = imageUrl;
+                }
+                
+                // Set preview image
                 if (preview) {
                     const img = preview.querySelector('img');
                     if (img) {
