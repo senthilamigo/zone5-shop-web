@@ -456,6 +456,22 @@
       ],
       "price": 1600,
       "status": "Available"
+    },
+    {
+      "id": "miykg6qeefxd5zmwi14",
+      "name": "test",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1765218312851.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1765218312851.jpeg",
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1765218314969.jpg"
+      ],
+      "description": "something",
+      "category": "Unstitched Salwar Suits",
+      "tags": [
+        "casual"
+      ],
+      "price": 3000,
+      "status": "SoldOut"
     }
   ]
 }
