@@ -25,7 +25,7 @@ function setupCategoryFilters() {
     const categoryFiltersContainer = document.getElementById('categoryFilters');
     if (!categoryFiltersContainer) return;
     
-    const categories = ['silk sarees', 'anarkali sarees', 'formal', 'churidar'];
+    const categories = ['Casual Sarees', 'Festive Sarees', 'Party Wear Sarees', 'Unstitched Salwar Suits', 'Readymade Kurts', 'Readymade Salwar Suits', 'Fabric'];
     
     categoryFiltersContainer.innerHTML = '';
     
