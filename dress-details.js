@@ -84,6 +84,7 @@ function renderDressDetails(dress) {
             </div>
             <div class="dress-details-info">
                 <h1 class="dress-details-name">${escapeHtml(dress.name)}</h1>
+                <p class="dress-details-id">${escapeHtml(dress.id)}</p>
                 <div class="dress-details-price">₹${dress.price.toFixed(2)}</div>
                 <div class="dress-details-status">
                     <span class="detail-label">Status:</span>

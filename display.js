@@ -181,7 +181,7 @@ function createProductCard(dress) {
             <p class="product-id">${escapeHtml(dress.id)}</p>
             <div class="product-card-price">₹${dress.price.toFixed(2)}</div>
             <div class="product-card-actions">
-                <a href="dress-details.html?id=${dress.id}" class="btn btn-primary" style="width: 100%; display: block; text-align: center; margin-bottom: 8px;">View Details</a>
+                <a href="dress-details.html?id=${dress.id}" class="btn btn-primary" style="width: 100%; display: block; text-align: center; margin-bottom: 8px;">View </a>
                 <button class="btn btn-secondary" onclick="event.stopPropagation(); handleAddToCart('${dress.id}')" style="width: 100%;" ${isSoldOut ? 'disabled' : ''}>${isSoldOut ? 'Sold Out' : 'Add to Cart'}</button>
             </div>
         </div>
