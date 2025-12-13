@@ -2,26 +2,13 @@
   "adminEmail": "shopzonefive@gmail.com",
   "dresses": [
     {
-      "id": "S0021",
-      "name": "Semi Tissue Saree",
-      "image": "",
-      "images": [],
-      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
-      "category": "Casual Sarees",
-      "tags": [
-        "Casual"
-      ],
-      "price": 1099,
-      "status": "Sold out"
-    },
-    {
       "id": "S0022",
       "name": "Semi Tissue Saree",
       "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0022.jpeg",
       "images": [
         "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0022.jpeg"
       ],
-      "description": "✨ Lightweight soft tissue fabric with a gentle natural sheen, featuring a warm golden-beige base. Designed with delicate multicolour translucent leaf motifs—scattered lightly across the body with a bold leaf cluster near the pallu—finished with a simple woven tissue border for a clean, refined look.\n\n🧵 Highlights:\n* Beautiful oversized floral pattern\n* Sophisticated muted gold shine\n* Easy to carry, non-bulky & elegant\n\n🧼 Care:\n* Dry clean recommended\n* Store in a soft muslin cloth to maintain shine\n\nNote: Slight shade variation may occur due to screen resolution and photography lighting.\n\nReturns & Refunds: Please note that we do not accept returns or offer refunds. We kindly request you to review all product details before placing your order.\n\n🧵 Highlights:\n* Beautiful oversized floral pattern\n* Sophisticated muted gold shine\n* Easy to carry, non-bulky & elegant\n\n🧼 Care:\n* Dry clean recommended\n* Store in a soft muslin cloth to maintain shine\n\nNote: Slight shade variation may occur due to screen resolution and photography lighting.",
+      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
       "category": "Festive Sarees",
       "tags": [
         "Festive"
@@ -49,13 +36,13 @@
       "images": [
         "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0024.jpeg"
       ],
-      "description": "✨ Fabric\n• 80% soft cotton, 20% blended fibre\n• Lightweight, breathable & skin-friendly\n\n✨ Design & Pattern\n• Grey base with peach–ivory–teal floral motifs\n• Ajrakh-inspired borders & geometric detailing\n• Coordinated printed bottom for a complete set\n• Soft ivory mixed-cotton dupatta for a classy finish\n\n✨ Set Includes\n• Top: Printed soft-mixed cotton\n• Bottom: Matching printed pattern\n• Dupatta: Solid ivory mixed cotton\n\n✨ Look & Feel\n• Elegant • Office-friendly • Neat & rich ethnic styling\n\n🧼 Care\n• Hand wash recommended\n• Mild detergent only\n• Dry in shade\n• Wash once before stitching",
+      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
       "category": "Party Wear Sarees",
       "tags": [
         "Party Wear"
       ],
       "price": 1099,
-      "status": "SoldOut"
+      "status": "Available"
     },
     {
       "id": "S0025",
@@ -64,10 +51,10 @@
       "images": [
         "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0025.jpeg"
       ],
-      "description": "🌿 Premium Soft Tissue Saree – Leaf Print Elegance \n\n✨ Lightweight soft tissue with a natural sheen, featuring a warm golden-beige base and multicolour translucent leaf motifs—scattered across the body with a bold leaf cluster near the pallu. Finished with a simple woven tissue border for a neat, classy look.\n\n🌟 Highlights:\n* Elegant soft tissue with a rich golden glow\n* Beautiful artistic leaf motifs\n* Lightweight, flowy & easy to drape\n* Perfect for small functions, festive wear & gifting\n\n🧼 Saree Care:\n* Dry clean recommended\n* Store in a muslin cloth to maintain shine\n* Avoid heavy ironing; use low heat if needed\n\nNote: Slight shade variation may occur due to screen resolution and photography lighting.",
-      "category": "Festive Sarees",
+      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
+      "category": "Unstitched Salwar Suits",
       "tags": [
-        "Saree"
+        "Unstitched"
       ],
       "price": 1099,
       "status": "Available"
@@ -79,10 +66,10 @@
       "images": [
         "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0026.jpeg"
       ],
-      "description": "This soft tissue saree comes in a light beige-gold shade with a natural sheen, highlighted by large pastel floral prints in orange and teal for an elegant, airy look. Lightweight and semi-transparent, it has a refined and graceful finish.\n\n🧵 Highlights:\n* Beautiful oversized floral pattern\n* Sophisticated muted gold shine\n* Easy to carry, non-bulky & elegant\n\n🧼 Care:\n* Dry clean recommended\n* Store in a soft muslin cloth to maintain shine\n\nNote: Slight shade variation may occur due to screen resolution and photography lighting.",
-      "category": "Festive Sarees",
+      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
+      "category": "Readymade Kurts",
       "tags": [
-        "Saree"
+        "Readymade"
       ],
       "price": 1099,
       "status": "Available"
@@ -242,13 +229,9 @@
       "name": "Saree",
       "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0037.jpeg",
       "images": [
-        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0037.jpeg",
-        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1765528637006.jpg",
-        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1765528639608.jpg",
-        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1765528642091.jpg",
-        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1765528644420.jpg"
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0037.jpeg"
       ],
-      "description": "✨ Fabric\n• 80% soft cotton, 20% blended fibre\n• Lightweight, breathable & skin-friendly\n\n✨ Design & Pattern\n• Grey base with peach–ivory–teal floral motifs\n• Ajrakh-inspired borders & geometric detailing\n• Coordinated printed bottom for a complete set\n• Soft ivory mixed-cotton dupatta for a classy finish\n\n✨ Set Includes\n• Top: Printed soft-mixed cotton\n• Bottom: Matching printed pattern\n• Dupatta: Solid ivory mixed cotton\n\n✨ Look & Feel\n• Elegant • Office-friendly • Neat & rich ethnic styling\n\n🧼 Care\n• Hand wash recommended\n• Mild detergent only\n• Dry in shade\n• Wash once before stitching",
+      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
       "category": "Casual Sarees",
       "tags": [
         "Casual"
@@ -291,10 +274,9 @@
       "name": "Premium Chanderi Silk Printed Saree",
       "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0040.jpeg",
       "images": [
-        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0040.jpeg",
-        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1765528241962.jpg"
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0040.jpeg"
       ],
-      "description": "🌿 Semi Tussar  Silk Saree – Indigo Floral Edition 🌿\n\n✨ Fabric: Pure Premium Chanderi Silk\n✨ Design: Traditional floral block-style print\n✨ Color: Rich indigo blue body with cream motifs\n✨ Border: Elegant beige-gold tissue border with black block pattern\n\n\n⸻\n\n⭐ Highlights\n* Lightweight & breathable\n* Soft texture with natural Chanderi shine\n* Classic floral motifs for a timeless ethnic look\n* Perfect for office, casual functions & festive wear\n\n⸻\n\n💫 Look & Feel\n* Graceful, classy & elegant\n* Airy, smooth and easy to drape\n\n⸻\n\n🧵 Care Instructions\n* Dry clean recommended\n* Iron on low heat (reverse side)\n* Store in muslin cloth",
+      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
       "category": "Party Wear Sarees",
       "tags": [
         "Party Wear"
