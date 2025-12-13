@@ -177,7 +177,8 @@ function createProductCard(dress) {
         </div>
         <div class="product-card-content">
             <h3 class="product-card-name">${escapeHtml(dress.name)}</h3>
-            <p class="product-card-description">${escapeHtml(dress.description || '')}</p>
+            
+            <p class="product-id">${escapeHtml(dress.id)}</p>
             <div class="product-card-price">₹${dress.price.toFixed(2)}</div>
             <div class="product-card-actions">
                 <a href="dress-details.html?id=${dress.id}" class="btn btn-primary" style="width: 100%; display: block; text-align: center; margin-bottom: 8px;">View Details</a>
