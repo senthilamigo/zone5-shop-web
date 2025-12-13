@@ -17,19 +17,6 @@
       "status": "Available"
     },
     {
-      "id": "S0023",
-      "name": "Semi Tissue Saree",
-      "image": "",
-      "images": [],
-      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
-      "category": "Work Wear Sarees",
-      "tags": [
-        "Work Wear"
-      ],
-      "price": 1099,
-      "status": "Sold out"
-    },
-    {
       "id": "S0024",
       "name": "Semi Tissue Saree",
       "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0024.jpeg",
@@ -703,19 +690,6 @@
       ],
       "price": 999,
       "status": "Available"
-    },
-    {
-      "id": "S0069",
-      "name": "",
-      "image": "",
-      "images": [],
-      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
-      "category": "Casual Sarees",
-      "tags": [
-        "Casual"
-      ],
-      "price": 1299,
-      "status": "Sold out"
     },
     {
       "id": "S0070",
