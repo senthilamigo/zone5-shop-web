@@ -114,6 +114,7 @@ function createInventoryItem(dress) {
         <img src="${dress.image}" alt="${dress.name}" class="inventory-item-image" onerror="this.src='https://via.placeholder.com/100x133?text=Dress'">
         <div class="inventory-item-content">
             <h3 class="inventory-item-name">${dress.name}</h3>
+            <p class="inventory-item-id">${dress.id}</p>
             <p class="inventory-item-category">Category: ${dress.category}</p>
             <p class="inventory-item-tags">Tags: ${dress.tags ? dress.tags.join(', ') : 'None'}</p>
             <p class="inventory-item-price">₹${dress.price.toFixed(2)}</p>
