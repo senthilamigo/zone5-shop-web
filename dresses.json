@@ -707,32 +707,6 @@
       "status": "Available"
     },
     {
-      "id": "S0071",
-      "name": "",
-      "image": "",
-      "images": [],
-      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
-      "category": "Work Wear Sarees",
-      "tags": [
-        "Work Wear"
-      ],
-      "price": 1299,
-      "status": "Sold out"
-    },
-    {
-      "id": "S0072",
-      "name": "",
-      "image": "",
-      "images": [],
-      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
-      "category": "Party Wear Sarees",
-      "tags": [
-        "Party Wear"
-      ],
-      "price": 1299,
-      "status": "Sold out"
-    },
-    {
       "id": "S0073",
       "name": "Saree",
       "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0073.jpeg",
@@ -853,19 +827,6 @@
       "status": "Available"
     },
     {
-      "id": "S0081",
-      "name": "",
-      "image": "",
-      "images": [],
-      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
-      "category": "Unstitched Salwar Suits",
-      "tags": [
-        "Unstitched"
-      ],
-      "price": 999,
-      "status": "Available"
-    },
-    {
       "id": "S0082",
       "name": "Saree",
       "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0082.jpeg",
@@ -951,19 +912,6 @@
       "category": "Work Wear Sarees",
       "tags": [
         "Work Wear"
-      ],
-      "price": 999,
-      "status": "Available"
-    },
-    {
-      "id": "S0088",
-      "name": "",
-      "image": "",
-      "images": [],
-      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
-      "category": "Party Wear Sarees",
-      "tags": [
-        "Party Wear"
       ],
       "price": 999,
       "status": "Available"
@@ -1310,21 +1258,6 @@
       "category": "Work Wear Sarees",
       "tags": [
         "Work Wear"
-      ],
-      "price": 899,
-      "status": "Available"
-    },
-    {
-      "id": "C0031",
-      "name": "Saree",
-      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/C0031.jpeg",
-      "images": [
-        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/C0031.jpeg"
-      ],
-      "description": "✨ Fabric\r\n• 80% soft cotton, 20% blended fibre\r\n• Lightweight, breathable & skin-friendly\r\n\r\n✨ Design & Pattern\r\n• Grey base with peach–ivory–teal floral motifs\r\n• Ajrakh-inspired borders & geometric detailing\r\n• Coordinated printed bottom for a complete set\r\n• Soft ivory mixed-cotton dupatta for a classy finish\r\n\r\n✨ Set Includes\r\n• Top: Printed soft-mixed cotton\r\n• Bottom: Matching printed pattern\r\n• Dupatta: Solid ivory mixed cotton\r\n\r\n✨ Look & Feel\r\n• Elegant • Office-friendly • Neat & rich ethnic styling\r\n\r\n🧼 Care\r\n• Hand wash recommended\r\n• Mild detergent only\r\n• Dry in shade\r\n• Wash once before stitching",
-      "category": "Party Wear Sarees",
-      "tags": [
-        "Party Wear"
       ],
       "price": 899,
       "status": "Available"
