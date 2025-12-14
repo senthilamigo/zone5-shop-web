@@ -168,7 +168,7 @@ async function handleCheckout(event) {
             <td>${item.category}</td>
             <td>₹${item.price.toFixed(2)}</td>
         </tr>`;
-        orderItemsText += `${index + 1}. ${item.name}\n   Price: ₹${item.price.toFixed(2)}\n   Category: ${item.category}\n\n`;
+        orderItemsText += `${index + 1}. ${item.name}\n  Id: ${item.id}\n  Price: ₹${item.price.toFixed(2)}\n   Category: ${item.category}\n\n`;
     });
     
     // Try to send email using EmailJS if available, otherwise use mailto
