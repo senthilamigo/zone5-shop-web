@@ -119,7 +119,7 @@ function handleFilterChange() {
 function applyFilters() {
     filteredDresses = allDresses.filter(dress => {
         // Category filter
-        const categoryMatch = selectedCategories.length > 0 || selectedCategories.includes(dress.category);
+        const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(dress.category);
         
         // Tag filter
         let tagMatch = true;
