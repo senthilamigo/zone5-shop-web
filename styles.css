@@ -67,6 +67,11 @@ a {
 
 ul {
     list-style: none;
+    margin: 15px 0 25px 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
 }
 
 img {
@@ -909,6 +914,58 @@ main {
         height: 120px;
         }
 
+.policy-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            }
+
+.policy-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            }
+
+.policy-point {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+            }
+
+.policy-icon {
+            font-size: 1.5rem;
+            }
+
+.faq-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+.faq-item {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 25px;
+        }
+
+.faq-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+.faq-item h3 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            color: #111;
+        }
+
+.faq-item p {
+            margin: 0;
+            color: #555;
+        }
+
     form button {
         background: #111;
         color: #fff;
@@ -1215,6 +1272,15 @@ main {
     font-size: 16px;
     color: var(--color-text-secondary);
     margin-bottom: var(--spacing-lg);
+}
+
+.note {
+    background: #fafafa;
+    border-left: 4px solid #111;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    font-size: 0.95rem;
 }
 
 /* Responsive for Dress Details */
