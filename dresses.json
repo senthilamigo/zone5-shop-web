@@ -1593,6 +1593,23 @@
       ],
       "price": 5200,
       "status": "Available"
+    },
+    {
+      "id": "mjflcouq3r29czv57f9",
+      "name": "Kanchipuram Silk Saree",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766313329304.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766313329304.jpeg"
+      ],
+      "description": "This exquisite saree features a deep black body beautifully contrasted with rich maroon accents and traditional gold zari-inspired geometric motifs, creating a striking yet graceful look. Temple Border (Traditional Thazhambu border) with modern plain black body\n\nThe classic pattern adds depth and character, making this saree a perfect choice for official meetings, conferences and special celebrations.\n\nFabric & Care Instructions\n\nPure silk is a natural, delicate fabric and deserves gentle care to retain its beauty.\n\nDry clean only (recommended for longevity)\n\nDo not wash with water or machine wash\n\nAvoid spraying perfume directly on the saree\n\nStore in a cool, dry place, wrapped in a soft cotton or muslin cloth\n\nRefold periodically to avoid permanent creases",
+      "category": "Party Wear Sarees",
+      "tags": [
+        "Festive",
+        "Party",
+        "Work wear"
+      ],
+      "price": 4999,
+      "status": "Available"
     }
   ]
 }
