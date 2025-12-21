@@ -1575,6 +1575,24 @@
       ],
       "price": 1260,
       "status": "Available"
+    },
+    {
+      "id": "mjfhxif5ry3xmcbcu3",
+      "name": "Kanchipuram Silk Saree",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766307579428.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766307579428.jpeg",
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766307581531.png"
+      ],
+      "description": "The saree features a vibrant, dual-tone teal green (or sea green) body that contrasts beautifully with a rich magenta-purple border and pallu.\nThe main body of the saree is dotted with small, delicate gold zari buttas (circular motifs), giving it a classic and elegant texture without being overpowering.\nThe bottom border is significantly wider and more ornate than the top border, creating a grand look when draped.",
+      "category": "Festive Sarees",
+      "tags": [
+        "Festive Saree",
+        "Silk Saree",
+        "Border Saree"
+      ],
+      "price": 5200,
+      "status": "Available"
     }
   ]
 }
