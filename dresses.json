@@ -332,12 +332,15 @@
     {
       "id": "C0035",
       "name": "Vichitra Silk Salwar Suit",
-      "image": "",
-      "images": [],
-      "description": "",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424153136.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424153136.jpeg"
+      ],
+      "description": "Vichitra Silk Salwar Suit - Wine red",
       "category": "Unstitched Salwar Suits",
       "tags": [
-        "Salwar Suit"
+        "Salwar Suit",
+        "Festive"
       ],
       "price": 1400,
       "status": "Available"
