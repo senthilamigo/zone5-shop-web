@@ -1711,9 +1711,11 @@
     {
       "id": "S0113",
       "name": "Tussar Printed Saree",
-      "image": "",
-      "images": [],
-      "description": "",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766423124081.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766423124081.jpeg"
+      ],
+      "description": "Tussar Printed Saree",
       "category": "Festive Sarees",
       "tags": [
         "Saree"
