@@ -304,9 +304,11 @@
     {
       "id": "C0033",
       "name": "Vichitra Silk Salwar Suit",
-      "image": "",
-      "images": [],
-      "description": "",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766423777202.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766423777202.jpeg"
+      ],
+      "description": "Silk Salwar Suit",
       "category": "Unstitched Salwar Suits",
       "tags": [
         "Salwar Suit"
@@ -710,13 +712,13 @@
       "images": [
         "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0041.jpeg"
       ],
-      "description": "🌿 Semi Tussar Silk Saree – Indigo Floral Edition 🌿\r\n\r\n✨ Fabric: Pure Premium Chanderi Silk\r\n✨ Design: Traditional floral block-style print\r\n✨ Color: Rich indigo blue body with cream motifs\r\n✨ Border: Elegant beige-gold tissue border with black block pattern\r\n\r\n\r\n⸻\r\n\r\n⭐ Highlights\r\n* Lightweight & breathable\r\n* Soft texture with natural Chanderi shine\r\n* Classic floral motifs for a timeless ethnic look\r\n* Perfect for office, casual functions & festive wear\r\n\r\n⸻\r\n\r\n💫 Look & Feel\r\n* Graceful, classy & elegant\r\n* Airy, smooth and easy to drape\r\n\r\n⸻\r\n\r\n🧵 Care Instructions\r\n* Dry clean recommended\r\n* Iron on low heat (reverse side)\r\n* Store in muslin cloth",
+      "description": "🌿 Semi Tussar Silk Saree – Indigo Floral Edition 🌿\n\n✨ Fabric: Pure Premium Chanderi Silk\n✨ Design: Traditional floral block-style print\n✨ Color: Rich indigo blue body with cream motifs\n✨ Border: Elegant beige-gold tissue border with black block pattern\n\n\n⸻\n\n⭐ Highlights\n* Lightweight & breathable\n* Soft texture with natural Chanderi shine\n* Classic floral motifs for a timeless ethnic look\n* Perfect for office, casual functions & festive wear\n\n⸻\n\n💫 Look & Feel\n* Graceful, classy & elegant\n* Airy, smooth and easy to drape\n\n⸻\n\n🧵 Care Instructions\n* Dry clean recommended\n* Iron on low heat (reverse side)\n* Store in muslin cloth",
       "category": "Office Wear Sarees",
       "tags": [
         "Saree"
       ],
       "price": 2199,
-      "status": "Available"
+      "status": "SoldOut"
     },
     {
       "id": "S0042",
