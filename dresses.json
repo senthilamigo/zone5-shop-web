@@ -319,9 +319,11 @@
     {
       "id": "C0034",
       "name": "Vichitra Silk Salwar Suit",
-      "image": "",
-      "images": [],
-      "description": "",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424325841.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424325841.jpeg"
+      ],
+      "description": "Vichitra Silk Salwar Suit - Mehandi Green",
       "category": "Unstitched Salwar Suits",
       "tags": [
         "Salwar Suit"
