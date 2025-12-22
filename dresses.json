@@ -361,9 +361,11 @@
     {
       "id": "C0037",
       "name": "Fancy Salwar Suit",
-      "image": "",
-      "images": [],
-      "description": "",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424270521.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424270521.jpeg"
+      ],
+      "description": "Fancy Salwar Suit",
       "category": "Unstitched Salwar Suits",
       "tags": [
         "Salwar Suit"
@@ -374,12 +376,15 @@
     {
       "id": "C0038",
       "name": "Ultra Premium Party Wear Salwar Suit",
-      "image": "",
-      "images": [],
-      "description": "",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424214474.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424214474.jpeg"
+      ],
+      "description": "Ultra Premium Party Wear Salwar Suit",
       "category": "Unstitched Salwar Suits",
       "tags": [
-        "Salwar Suit"
+        "Salwar Suit",
+        "Party wear"
       ],
       "price": 2700,
       "status": "Available"
