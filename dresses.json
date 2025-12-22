@@ -350,9 +350,11 @@
     {
       "id": "C0036",
       "name": "Fancy Salwar Suit",
-      "image": "",
-      "images": [],
-      "description": "",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424387421.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424387421.jpeg"
+      ],
+      "description": "Fancy Salwar Suit - Rust Orangish red",
       "category": "Unstitched Salwar Suits",
       "tags": [
         "Salwar Suit"
