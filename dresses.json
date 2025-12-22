@@ -397,9 +397,11 @@
     {
       "id": "C0040",
       "name": "Floral Salwar Suit",
-      "image": "",
-      "images": [],
-      "description": "",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424006850.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424006850.jpeg"
+      ],
+      "description": "Fancy Salwar Suit\nColor : Teal\nDesign : Floral\nUnstitched 3 pcs Salwar Suit",
       "category": "Unstitched Salwar Suits",
       "tags": [
         "Salwar Suit"
