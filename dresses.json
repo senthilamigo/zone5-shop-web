@@ -410,12 +410,15 @@
     {
       "id": "C0041",
       "name": "Readymade Salwar Suit - Premium",
-      "image": "",
-      "images": [],
-      "description": "",
-      "category": "Readymade Salwar Suit",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766423882247.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766423882247.jpeg"
+      ],
+      "description": "Silk Salwar Suit - Premium\n3 Pcs Complete Readymade Salwar Suit \nSize : XXL",
+      "category": "Readymade Salwar Suits",
       "tags": [
-        "Salwar Suit"
+        "Salwar Suit",
+        "Festive"
       ],
       "price": 2200,
       "status": "Available"
