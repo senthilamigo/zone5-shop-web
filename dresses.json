@@ -384,9 +384,11 @@
     {
       "id": "C0039",
       "name": "Fancy Salwar Suit",
-      "image": "",
-      "images": [],
-      "description": "",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424076264.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766424076264.jpeg"
+      ],
+      "description": "Fancy Salwar Suit\n3 Pcs\nUnstitched Material with heavy neck work",
       "category": "Unstitched Salwar Suits",
       "tags": [
         "Salwar Suit"
