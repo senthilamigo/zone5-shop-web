@@ -2653,11 +2653,11 @@
     {
       "id": "S0158",
       "name": "Rajkot Silk Cotton Saree",
-      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/S0158.jpeg",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766575700630.jpeg",
       "images": [
-        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/S0158.jpeg"
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766575700630.jpeg"
       ],
-      "description": "",
+      "description": "Blue Rajkot Ikkat Design",
       "category": "Festive Sarees",
       "tags": [
         "Saree"
@@ -2903,6 +2903,22 @@
         "Salwar Suit"
       ],
       "price": 1250,
+      "status": "Available"
+    },
+    {
+      "id": "mjlr90jbrk723fz3qpm",
+      "name": "Cotton Salwar Suit",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766686032071.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766686032071.jpeg"
+      ],
+      "description": "Cotton Salwar Suit",
+      "category": "Unstitched Salwar Suits",
+      "tags": [
+        "Casual",
+        "Office wear"
+      ],
+      "price": 690,
       "status": "Available"
     }
   ]
