@@ -556,6 +556,7 @@ main {
     height: fit-content;
     position: sticky;
     top: 140px;
+    overflow-y: auto;
 }
 
 .dress-form {
