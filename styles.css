@@ -52,7 +52,8 @@ html {
   }
 
 body {
-    font-family: var(--font-primary);
+    font-family: var(--font-primary); 
+    /* font-family: 'Poppins', sans-serif; */
     font-size: 14px;
     line-height: 1.6;
     color: var(--color-text-primary);
