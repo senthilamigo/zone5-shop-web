@@ -360,6 +360,7 @@ function setupForm() {
 
 // Handle form submission
 async function handleFormSubmit() {
+    const drid = document.getElementById('dressId').value.trim();
     const name = document.getElementById('dressName').value.trim();
     const description = document.getElementById('dressDescription').value.trim();
     const category = document.getElementById('dressCategory').value;
@@ -481,7 +482,8 @@ async function handleFormSubmit() {
         const primaryImage = finalImageUrls[0];
         
         const dress = {
-            id: editingDressId || generateId(),
+            //id: editingDressId || generateId(),
+            id: editingDressId || drid, 
             name: name,
             image: primaryImage, // For backward compatibility
             images: finalImageUrls, // New format with all images
