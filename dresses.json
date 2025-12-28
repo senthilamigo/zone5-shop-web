@@ -2921,6 +2921,22 @@
       ],
       "price": 690,
       "status": "Available"
+    },
+    {
+      "id": "C0074",
+      "name": "Cotton Salwar Suit",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766914857119.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766914857119.jpeg"
+      ],
+      "description": "Cotton Salwar Suit",
+      "category": "Unstitched Salwar Suits",
+      "tags": [
+        "Casual",
+        "Office"
+      ],
+      "price": 690,
+      "status": "Available"
     }
   ]
 }
