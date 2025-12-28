@@ -1226,13 +1226,13 @@
       "images": [
         "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0077.jpeg"
       ],
-      "description": "🌟🧡 Elegant Paisley Print Saree - Warm Gold Edition 🧡🌟\r\n\r\n✨ Fabric: Soft, Structured Blend (Likely Cotton Silk or Premium Textured Cotton)\r\n✨ Design: All-over small and large Paisley Motifs combined with repeating floral patterns along the border.\r\n✨ Color: Rich Warm Gold/Mustard Yellow base with prints in shades of Deep Red, Maroon, and Olive Green.\r\n✨ Border: Dual woven border featuring an intricate pattern and a solid band of Rust/Copper tone.\r\n\r\n⭐ Key Features:\r\n\r\n* Comfortable feel with a luxurious texture or slight sheen.\r\n* Rich, traditional paisley print for a timeless look.\r\n* Warm color palette perfect for festive and casual occasions.\r\n* Ideal for: Daytime events, casual festive wear, and everyday elegance.\r\n\r\n💗 Feel: Soft • Structured • Rich texture\r\n\r\n🧵 Care: Dry clean or gentle hand wash recommended",
+      "description": "🌟🧡 Elegant Paisley Print Saree - Warm Gold Edition 🧡🌟\n\n✨ Fabric: Soft, Structured Blend (Likely Cotton Silk or Premium Textured Cotton)\n✨ Design: All-over small and large Paisley Motifs combined with repeating floral patterns along the border.\n✨ Color: Rich Warm Gold/Mustard Yellow base with prints in shades of Deep Red, Maroon, and Olive Green.\n✨ Border: Dual woven border featuring an intricate pattern and a solid band of Rust/Copper tone.\n\n⭐ Key Features:\n\n* Comfortable feel with a luxurious texture or slight sheen.\n* Rich, traditional paisley print for a timeless look.\n* Warm color palette perfect for festive and casual occasions.\n* Ideal for: Daytime events, casual festive wear, and everyday elegance.\n\n💗 Feel: Soft • Structured • Rich texture\n\n🧵 Care: Dry clean or gentle hand wash recommended",
       "category": "Party Wear Sarees",
       "tags": [
         "Saree"
       ],
       "price": 1280,
-      "status": "Available"
+      "status": "SoldOut"
     },
     {
       "id": "S0078",
@@ -2917,6 +2917,23 @@
       "tags": [
         "Casual",
         "Office wear"
+      ],
+      "price": 690,
+      "status": "Available"
+    },
+    {
+      "id": "C0075",
+      "name": "Salwar Suit - Cotton Casual",
+      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766914610669.jpeg",
+      "images": [
+        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/image_1766914610669.jpeg"
+      ],
+      "description": "Cotton Salwar Suit",
+      "category": "Unstitched Salwar Suits",
+      "tags": [
+        "Cotton",
+        "Casual Suit",
+        "Work Wear"
       ],
       "price": 690,
       "status": "Available"
