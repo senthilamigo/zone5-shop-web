@@ -25,7 +25,7 @@ function setupCategoryFilters() {
     const categoryFiltersContainer = document.getElementById('categoryFilters');
     if (!categoryFiltersContainer) return;
     
-    const categories = ['Casual Sarees', 'Festive Sarees', 'Party Wear Sarees','Office Wear Sarees', 'Unstitched Salwar Suits',  'Readymade Salwar Suits'];
+    const categories = ['Casual Sarees', 'Festive Sarees', 'Party Wear Sarees','Office Wear Sarees', 'Unstitched Salwar Suits', 'Readymade Salwar Suits'  ];
     
     categoryFiltersContainer.innerHTML = '';
     
@@ -253,4 +253,5 @@ document.addEventListener('DOMContentLoaded', async function() {
 // Make functions available globally
 window.handleAddToCart = handleAddToCart;
 window.clearFilters = clearFilters;
+
 
