@@ -36,9 +36,9 @@ async function loadSections() {
     
     combinations.forEach(([key, sectionDresses]) => {
         const [category, tag] = key.split('-');
-        if ( !(category == "Unstitched Salwar Suits" && key == "Salwar Suit" )) {        
-            // Take up to 4 dresses, or all if less than 4
-            const sectionDressesLimited = sectionDresses.slice(0, Math.min(4, sectionDresses.length));
+        const sectionDressesLimited = sectionDresses.slice(0, Math.min(4, sectionDresses.length));
+        if ( !(category == "Unstitched Salwar Suits" && key == "Salwar Suit" )) {       
+            // Take up to 4 dresses, or all if less than 4            
             renderSection(category, tag, sectionDressesLimited);
         }
     });
@@ -114,6 +114,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 // Make loadSections available globally
 window.loadSections = loadSections;
+
 
 
 
