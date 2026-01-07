@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600&family=Playfair+Display:ital@1&display=swap");
+
+:root {
+    /* ===== Brand Colors – Zone 5 Shop ===== */
+    --color-primary: #f2c94c;                 /* Gold */
+    --color-primary-name: "Zone 5 Gold";
+    --color-secondary-dark: #0b0b0b;           /* Deep Black */
+    --color-secondary-dark-gray: #1a1a1a;
+    
+    --color-neutral-light-gray: #f5f5f5;
+    --color-neutral-medium-gray: #e0e0e0;
+    --color-white: #ffffff;
+
+    --color-text-primary: #111111;
+    --color-text-secondary: #666666;
+    --color-text-inverse: #ffffff;
+
+    --color-accent-red: #d32f2f;
+    --color-accent-sale: #ff0000;
+    --color-accent-discount: #4caf50;
+
+    /* ===== Typography ===== */
+    --font-primary: "Poppins", "Spartan", sans-serif;
+    --font-fallback: system-ui, -apple-system, sans-serif;
+
+    /* ===== Spacing & Layout (unchanged) ===== */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+    --spacing-xxxl: 64px;
+
+    --max-width: 1440px;
+    --gutter: 16px;
+    --border-radius: 6px;
+    --border-radius-lg: 12px;
+}
+
+body {
+    background-color: #000;
+    color: var(--color-text-primary);
+}
+
+h1, h2, h3 {
+    color: #222;
+}
+
+.brand-script {
+    font-family: "Playfair Display", cursive;
+    font-style: italic;
+    color: var(--color-primary);
+}
+
+.main-header {
+    background: linear-gradient(180deg, #000 0%, #0f0f0f 100%);
+    border-bottom: 1px solid rgba(242, 201, 76, 0.25);
+}
+
+.logo {
+    color: var(--color-primary);
+    letter-spacing: 1px;
+}
+
+.nav-links a {
+    position: relative;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.hero {
+    background-blend-mode: multiply;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.hero-content h1 {
+    font-size: 52px;
+    letter-spacing: 1px;
+}
+
+.hero-content p {
+    color: #f1f1f1;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #f2c94c, #d4af37);
+    color: #000;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 8px 24px rgba(242, 201, 76, 0.35);
+}
+
+.btn-secondary {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: #000;
+}
+.product-card {
+    background: #111;
+    border: 1px solid rgba(242, 201, 76, 0.25);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.product-card-name {
+    color: var(--color-primary);
+}
+
+.product-card-price {
+    color: #d4af37;
+}
+.filters-sidebar,
+.admin-form-section,
+.cart-summary {
+    background-color: #111;
+    color: #fff;
+    border: 1px solid rgba(242, 201, 76, 0.2);
+}
+
+.filter-title,
+.detail-label {
+    color: var(--color-primary);
+}
+.main-footer {
+    background-color: #000;
+    color: #aaa;
+}
+
+.footer-section h3 {
+    color: var(--color-primary);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(242, 201, 76, 0.2);
+}
