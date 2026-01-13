@@ -1711,7 +1711,7 @@
         "Salwar Suit"
       ],
       "price": 1400,
-      "status": "Available"
+      "status": "SoldOut"
     },
     {
       "id": "C0040",
@@ -2342,13 +2342,13 @@
       "images": [
         "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/main/images/S0154.jpeg"
       ],
-      "description": "",
+      "description": "Pure Cotton Saree",
       "category": "Office Wear Sarees",
       "tags": [
         "Saree"
       ],
       "price": 1600,
-      "status": "Available"
+      "status": "SoldOut"
     },
     {
       "id": "S0155",
