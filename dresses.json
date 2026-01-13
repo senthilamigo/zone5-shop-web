@@ -3522,7 +3522,7 @@
       "images": [
         "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0190.jpeg"
       ],
-      "description": "",
+      "description": "Saree",
       "category": "Festive Sarees",
       "tags": [
         "Saree",
@@ -3530,7 +3530,7 @@
         "Festive",
         "Work Wear"
       ],
-      "price": 2250,
+      "price": 1850,
       "status": "Available"
     },
     {
@@ -3540,7 +3540,7 @@
       "images": [
         "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/S0191.jpeg"
       ],
-      "description": "",
+      "description": "Saree",
       "category": "Party Wear Sarees",
       "tags": [
         "Saree",
@@ -3548,7 +3548,7 @@
         "Festive",
         "Work Wear"
       ],
-      "price": 2300,
+      "price": 1900,
       "status": "Available"
     },
     {
