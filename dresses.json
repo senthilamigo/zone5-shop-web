@@ -977,34 +977,19 @@
       "status": "Available"
     },
     {
-      "id": "C0011",
-      "name": "Premium Pure Cotton Suit – Handblock Style",
-      "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/C0011.jpeg",
-      "images": [
-        "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/C0011.jpeg"
-      ],
-      "description": "🌸 Pure Cotton Printed Suit – Navy Blue Elegance 🌸\r\n\r\n✨ Fabric: 100% Pure Soft Cotton\r\n✨ Feel: Breathable, lightweight & perfect for daily wear\r\n✨ Colour: Deep navy base with vibrant red & white detailing\r\n\r\n👗 Top:\r\n* Traditional block-style print in red & white\r\n* Geometric + floral motifs for a rich ethnic look\r\n\r\n👖 Bottom / Dupatta:\r\n* Coordinated navy piece with intricate white block-style design\r\n* Perfect contrast to complete the set\r\n\r\n💫 Highlight: Skin-friendly pure cotton, ideal for summer & everyday comfort\r\n\r\n🧼 Care Instructions:\r\n* Hand wash recommended\r\n* Use mild detergent\r\n* Dry in shade\r\n* Wash once before stitching\r\n* Mild colour release may occur initially (pure cotton)",
-      "category": "Unstitched Salwar Suits",
-      "tags": [
-        "Salwar Suit"
-      ],
-      "price": 999,
-      "status": "Sold out"
-    },
-    {
       "id": "C0015",
       "name": "Premium Pure Cotton Suit – Handblock Style",
       "image": "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/C0015.jpeg",
       "images": [
         "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/C0015.jpeg"
       ],
-      "description": "🌺 PURE COTTON BLOCK PRINTED LUXURY SUIT – MAROON 🌺\r\n✨ Soft • Breathable • Premium Ethnic Finish ✨\r\n\r\n🧵 Fabric:\r\n• 100% Pure Cotton\r\n• Soft, lightweight & extremely breathable\r\n• Perfect for everyday comfort and stylish wear\r\n\r\n🎨 Print & Design:\r\n• Rich maroon base with elegant traditional block-printed floral motifs\r\n• Intricate beige patterns add a classy ethnic charm\r\n• Natural, hand-block inspired design that never goes out of style\r\n\r\n👗 Suitable For:\r\n• Daily wear, office wear, small functions & casual outings\r\n• Ideal for stitching straight-cut suits, A-line kurtis or semi-ethnic sets\r\n\r\n✨ Highlights:\r\n• Premium-quality cotton\r\n• Colorfast, skin-friendly print\r\n• Comfortable for all-day wear\r\n• Gives a rich, elegant ethnic look\r\n\r\n🧼 Care Instructions:\r\n• Gentle hand wash separately\r\n• Dry in shade to maintain color vibrancy\r\n• Mild ironing recommended",
+      "description": "🌺 PURE COTTON BLOCK PRINTED LUXURY SUIT – MAROON 🌺\n✨ Soft • Breathable • Premium Ethnic Finish ✨\n\n🧵 Fabric:\n• 100% Pure Cotton\n• Soft, lightweight & extremely breathable\n• Perfect for everyday comfort and stylish wear\n\n🎨 Print & Design:\n• Rich maroon base with elegant traditional block-printed floral motifs\n• Intricate beige patterns add a classy ethnic charm\n• Natural, hand-block inspired design that never goes out of style\n\n👗 Suitable For:\n• Daily wear, office wear, small functions & casual outings\n• Ideal for stitching straight-cut suits, A-line kurtis or semi-ethnic sets\n\n✨ Highlights:\n• Premium-quality cotton\n• Colorfast, skin-friendly print\n• Comfortable for all-day wear\n• Gives a rich, elegant ethnic look\n\n🧼 Care Instructions:\n• Gentle hand wash separately\n• Dry in shade to maintain color vibrancy\n• Mild ironing recommended",
       "category": "Unstitched Salwar Suits",
       "tags": [
         "Salwar Suit"
       ],
       "price": 999,
-      "status": "Available"
+      "status": "SoldOut"
     },
     {
       "id": "C0016",
@@ -1043,13 +1028,13 @@
       "images": [
         "https://raw.githubusercontent.com/senthilamigo/zone5-shop-web/refs/heads/main/images/C0018.jpeg"
       ],
-      "description": "💜 Pure Cotton Luxury Block Print Suit – Deep Plum Edition 💜\r\n\r\n✨ Fabric: 100% Pure Cotton\r\n✨ Feel: Soft, airy & skin-friendly\r\n✨ Colour: Rich deep plum with subtle beige block prints\r\n\r\n👗 Top:\r\n* Beautiful all-over floral block motifs\r\n* Classic handblock-style detailing for an elegant ethnic finish\r\n\r\n👖 Dupatta / Bottom:\r\n* Matching deep plum fabric with bold chevron + dotted pattern\r\n* Beige ethnic border adds a refined touch\r\n\r\n💫 Highlight: A premium, rich-looking suit that’s perfect for daily wear & small occasions\r\n\r\n🧼 Care Instructions:\r\n* Hand wash recommended\r\n* Use mild detergent\r\n* Dry in shade\r\n* Wash once before stitching\r\n* Mild colour release may occur initially (pure cotton)",
+      "description": "💜 Pure Cotton Luxury Block Print Suit – Deep Plum Edition 💜\n\n✨ Fabric: 100% Pure Cotton\n✨ Feel: Soft, airy & skin-friendly\n✨ Colour: Rich deep plum with subtle beige block prints\n\n👗 Top:\n* Beautiful all-over floral block motifs\n* Classic handblock-style detailing for an elegant ethnic finish\n\n👖 Dupatta / Bottom:\n* Matching deep plum fabric with bold chevron + dotted pattern\n* Beige ethnic border adds a refined touch\n\n💫 Highlight: A premium, rich-looking suit that’s perfect for daily wear & small occasions\n\n🧼 Care Instructions:\n* Hand wash recommended\n* Use mild detergent\n* Dry in shade\n* Wash once before stitching\n* Mild colour release may occur initially (pure cotton)",
       "category": "Unstitched Salwar Suits",
       "tags": [
         "Salwar Suit"
       ],
       "price": 999,
-      "status": "Available"
+      "status": "SoldOut"
     },
     {
       "id": "C0020",
