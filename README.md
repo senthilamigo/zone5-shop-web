@@ -1,4 +1,4 @@
 # zone5-shop-web
 website for zone5shop
-.
-testing to trigger deploy
+----
+this repo is not linked to vercel. dont use it
