@@ -7,7 +7,9 @@ let selectedTags = [];
 
 // Load all dresses and display them
 async function loadAllDresses() {
-    allDresses = await getDresses();
+    const dresses = await getDresses();
+    // Exclude products with status 'Disabled' from the shop display
+    allDresses = dresses.filter(dress => dress.status !== 'Disabled');
     filteredDresses = [...allDresses];
     renderProductGrid(filteredDresses);
     setupFilters();
@@ -253,5 +255,3 @@ document.addEventListener('DOMContentLoaded', async function() {
 // Make functions available globally
 window.handleAddToCart = handleAddToCart;
 window.clearFilters = clearFilters;
-
-
